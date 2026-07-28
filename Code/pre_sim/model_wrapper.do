@@ -104,7 +104,7 @@ global NEFSC_svy_yrs "inlist(year,2024, 2023, 2022)"
 global inflation_expansion=1.31 
 
 /* find the root of the project 
-prior to running the wrapper, you must change to $groundfishRDMdir so here picks up the project
+prior to running the wrapper, you must change to the $flukeRDMdir so here picks up the project
 */
 
 here, nogit 
