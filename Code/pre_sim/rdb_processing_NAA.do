@@ -146,7 +146,7 @@ save "$misc_data_cd/`Scup_historical_filename'", replace
 import delimited using "$misc_data_cd/`scup_project'", clear
 
 forvalues class =0/7{
-	replace a`class'=`class'/1000
+	replace a`class'=a`class'/1000
 	rename a`class' age`class'
 
 }
