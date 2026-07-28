@@ -186,8 +186,9 @@ if `prep_NAA_for_dashboard' {
 	}
 if `push_NAA_to_gdrive' {
 	di "Converting dta to Rds and pushing to GDrive"
-	
-			rscript using "$input_code_cd\rdb_convert_and_push_NAA_to_gdrive.R"
+     /* push through the ndraws into R, so we can make sure we have the proper number of rows */	
+	rscript using "$input_code_cd\rdb_convert_and_push_NAA_to_gdrive.R" , args($ndraws) 
+
 	di "NAA pushed to GDrive"
 
 	}

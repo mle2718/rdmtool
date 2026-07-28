@@ -1,6 +1,18 @@
 #This code reads in a catch per trip dta for the rec dashboard and uploads it to Google drive as an Rds
 
 
+# Define arguments
+args <- commandArgs(trailingOnly = TRUE)
+if (length(args) != 1) {
+  stop("Error: This script requires exactly one argument.", call. = FALSE)
+}
+
+#read in arguments. Ensure they are numeric
+number_of_draws  <- as.numeric(args[1])
+# Show them, just in case.
+cat("Number of Draws (should match ndraws global from stata:", number_of_draws, "\n")
+
+
 #Load libraries
 library(tidyverse)
 library(haven)
@@ -57,13 +69,24 @@ for (file_in in SFSBSB_filestubs){
   
   # Read in my .dta file
   working_NAA <- read_dta(input_file_and_path)
+  # Strip formats, labels, and add the data_versionfield.
   working_NAA <- working_NAA  %>%
     zap_formats() %>%
     zap_label() %>%
     mutate(data_version=ymd(data_version)) %>%
     relocate(year, fishery, common, species_itis,stock_abbrev, state, wave, metric,units, source, data_version)
+  
+  age_classes<-working_NAA%>% 
+         select(starts_with("age")) %>% 
+         ncol()
+  
+  
+  # make it long
   NAA_long<-pivot_naa_long(working_NAA)
-
+  #make sure I have the proper number of rows. Throw an informative error message if not.
+  if (nrow(NAA_long) != age_classes * number_of_draws) {
+    stop(glue("Error in file {file_in}"))
+  }  
   validate_naa_data(NAA_long)
   # Save dataframe as Rds
   write_rds(NAA_long, file=output_file_and_path)
