@@ -59,8 +59,6 @@ forvalues class =0/7{
 	rename a`class' age`class'
 
 }
-collapse (mean) age*, by(year)
-
 
 gen fishery= "SFSBSB"
 gen common= "SUMMER FLOUNDER"
@@ -77,6 +75,8 @@ gen str data_version= "`vintage_string'"
 duplicates drop 
 assert year==2024
 sample $ndraws, count
+assert _N==$ndraws
+
 capture drop draw
 save "$misc_data_cd/`SF_historical_filename'", replace
 
@@ -105,6 +105,7 @@ duplicates drop
 assert year==2026
 
 sample $ndraws, count
+assert _N==$ndraws
 
 save "$misc_data_cd/`SF_projected_filename'", replace
 
@@ -119,8 +120,6 @@ forvalues class =0/7{
 
 
 }
-
-collapse (mean) age*, by(year)
 
 
 gen fishery= "SFSBSB"
@@ -138,6 +137,8 @@ gen str data_version= "`vintage_string'"
 duplicates drop 
 assert year==2024
 sample $ndraws, count
+assert _N==$ndraws
+
 capture drop draw
 
 save "$misc_data_cd/`Scup_historical_filename'", replace
@@ -166,6 +167,8 @@ gen str data_version= "`vintage_string'"
 duplicates drop
 assert year==2026 
 sample $ndraws, count
+assert _N==$ndraws
+
 
 save "$misc_data_cd/`Scup_projected_filename'", replace
 
@@ -182,8 +185,6 @@ gen year=2024
 forvalues i = 1/8 {
     rename v`i' age`i'    
 }
-collapse (mean) age*, by(year)
-
 
 gen fishery= "SFSBSB"
 gen common= "BLACK SEA BASS"
@@ -198,6 +199,8 @@ gen str data_version= "`vintage_string'"
 
 duplicates drop 
 sample $ndraws, count
+assert _N==$ndraws
+
 capture drop draw
 
 save "$misc_data_cd/`BSB_South_historical_filename'", replace
@@ -211,7 +214,6 @@ forvalues i = 1/8 {
     rename v`i' age`i'    
 }
 
-collapse (mean) age*, by(year)
 
 gen fishery= "SFSBSB"
 gen common= "BLACK SEA BASS"
@@ -226,6 +228,8 @@ gen str data_version= "`vintage_string'"
 
 duplicates drop 
 sample $ndraws, count
+assert _N==$ndraws
+
 capture drop draw
 
 save "$misc_data_cd/`BSB_North_historical_filename'", replace
@@ -260,6 +264,7 @@ duplicates drop
 capture drop year
 gen year=2026
 sample $ndraws, count
+assert _N==$ndraws
 capture drop draw
 
 save "$misc_data_cd/`BSB_South_projected_filename'", replace
@@ -287,6 +292,8 @@ duplicates drop
 capture drop year
 gen year=2026
 sample $ndraws, count
+assert _N==$ndraws
+
 capture drop draw
 
 save "$misc_data_cd/`BSB_North_projected_filename'", replace
