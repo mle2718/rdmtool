@@ -12,7 +12,6 @@ number_of_draws  <- as.numeric(args[1])
 # Show them, just in case.
 cat("Number of Draws (should match ndraws global from stata:", number_of_draws, "\n")
 
-
 #Load libraries
 library(tidyverse)
 library(haven)
@@ -76,18 +75,22 @@ for (file_in in SFSBSB_filestubs){
     mutate(data_version=ymd(data_version)) %>%
     relocate(year, fishery, common, species_itis,stock_abbrev, state, wave, metric,units, source, data_version)
   
-  age_classes<-working_NAA%>% 
-         select(starts_with("age")) %>% 
-         ncol()
+  age_classes<-working_NAA%>%
+    select(starts_with("age")) %>%
+    ncol()
   
   
   # make it long
   NAA_long<-pivot_naa_long(working_NAA)
   #make sure I have the proper number of rows. Throw an informative error message if not.
-  if (nrow(NAA_long) != age_classes * number_of_draws) {
-    stop(glue("Error in file {file_in}"))
-  }  
-  validate_naa_data(NAA_long)
+  
+  validate_naa_data(df=NAA_long,
+                    age_classes=age_classes,
+                    file_in=file_in,
+                    projected_names=SFSBSB_filestubs_projected,
+                    historical_names=SFSBSB_filestubs_historical, 
+                    ndraws=number_of_draws)
+    
   # Save dataframe as Rds
   write_rds(NAA_long, file=output_file_and_path)
   message(file_in, " saved as .Rds")
