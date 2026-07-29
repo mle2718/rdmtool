@@ -174,7 +174,7 @@ global NEFSC_svy_yrs "inlist(year,2024, 2023, 2022)"
 global inflation_expansion=1.31 
 
 /* find the root of the project 
-prior to running the wrapper, you must change to $groundfishRDMdir so here picks up the project
+prior to running the wrapper, you must change to the $flukeRDMdir so here picks up the project
 */
 
 here, nogit 
@@ -245,6 +245,8 @@ loc catch_at_length_project=1		// Generate projection-year catch-at-length
    separately. */
 loc catch_per_trip_project=1       // Generate projection-year catch-per trip
 
+loc prep_NAA_for_dashboard = 1		// Pull Assessment data
+loc push_NAA_to_gdrive =1 			// Convert Assessment data to Rds, reshape to long, and push to googledrive
 
 
 /* Prototype mode. ON as committed - see the header. This silently overrides
@@ -254,7 +256,7 @@ loc catch_per_trip_project=1       // Generate projection-year catch-per trip
    sets its own n_simulations (currently 10), so changing proto here does not
    keep the two halves of the pipeline in step. */
 // Prototyping
-local proto = 1
+local proto = 0
 
 if `proto' {
 	global ndraws 3
@@ -270,6 +272,21 @@ if `pull_assessment' {
 	do "$input_code_cd\get_assessment_from_gdrive.do"
 	}
 
+	/* This code requires you to mount your google drive to D on your computer */
+if `prep_NAA_for_dashboard' {
+	di "Pulling Assessment data from google"
+	do "$input_code_cd\rdb_processing_NAA.do"
+	}
+if `push_NAA_to_gdrive' {
+	di "Converting dta to Rds and pushing to GDrive"
+     /* push through the ndraws into R, so we can make sure we have the proper number of rows */	
+	rscript using "$input_code_cd\rdb_convert_and_push_NAA_to_gdrive.R" , args($ndraws) 
+
+	di "NAA pushed to GDrive"
+
+	}
+
+	
 	
 
 // 1) Pull the MRIP data

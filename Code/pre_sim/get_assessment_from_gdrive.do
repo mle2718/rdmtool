@@ -71,8 +71,11 @@ display "get_assessment_from_gdrive.do: copying assessment files from Google Dri
 
 local file_list : dir "`google_folder'" files "*"
 
+local i=0
 foreach file of local file_list {
     copy "`google_folder'/`file'" "${misc_data_cd}/`file'", replace
+	local ++i
+
 }
 
 display "get_assessment_from_gdrive.do: finished copying assessment files."
