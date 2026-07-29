@@ -11,7 +11,6 @@ if (length(args) != 1) {
 number_of_draws  <- as.numeric(args[1])
 # Show them, just in case.
 cat("Number of Draws (should match ndraws global from stata:", number_of_draws, "\n")
-
 #Load libraries
 library(tidyverse)
 library(haven)
@@ -61,6 +60,11 @@ NAA_long_holder<-list()
 #I'm writing a loop instead of an lapply. Sorry.
 for (file_in in SFSBSB_filestubs){
 
+  if (file_in %in% SFSBSB_filestubs_historical){
+    type<-"historical"
+  } else  if (file_in %in% SFSBSB_filestubs_projected){
+    type<-"projected"
+  }
   input_file_and_path <- file.path(misc_data_dir,glue("{file_in}_{data_vintage_string}.dta"))
   
   output_file<-glue("{file_in}_{data_vintage_string}.Rds")
@@ -86,9 +90,7 @@ for (file_in in SFSBSB_filestubs){
   
   validate_naa_data(df=NAA_long,
                     age_classes=age_classes,
-                    file_in=file_in,
-                    projected_names=SFSBSB_filestubs_projected,
-                    historical_names=SFSBSB_filestubs_historical, 
+                    type=type,
                     ndraws=number_of_draws)
     
   # Save dataframe as Rds
