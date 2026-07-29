@@ -59,12 +59,15 @@ forvalues class =0/7{
 	rename a`class' age`class'
 
 }
+assert year==2024
+
+collapse (mean) age*, by(year)
 
 gen fishery= "SFSBSB"
 gen common= "SUMMER FLOUNDER"
 gen state=""
 gen wave=.
-gen metric="2024 Numbers at Age"
+gen metric="Historical Mean Numbers of Age"
 gen source = "2025 Assessment"
 gen stock_abbrev = ""
 gen species_itis =172735
@@ -73,9 +76,7 @@ gen region  = "CST"
 gen str data_version= "`vintage_string'"
 
 duplicates drop 
-assert year==2024
-sample $ndraws, count
-assert _N==$ndraws
+
 
 capture drop draw
 save "$misc_data_cd/`SF_historical_filename'", replace
@@ -120,13 +121,17 @@ forvalues class =0/7{
 
 
 }
+assert year==2024
+
+collapse (mean) age*, by(year)
+
 
 
 gen fishery= "SFSBSB"
 gen common= "SCUP"
 gen state=""
 gen wave=.
-gen metric="2024 Numbers at Age"
+gen metric="Historical Mean Numbers of Age"
 gen source = "2024 Assessment"
 gen stock_abbrev = ""
 gen species_itis =172735
@@ -136,8 +141,6 @@ gen str data_version= "`vintage_string'"
 
 duplicates drop 
 assert year==2024
-sample $ndraws, count
-assert _N==$ndraws
 
 capture drop draw
 
@@ -185,23 +188,18 @@ gen year=2024
 forvalues i = 1/8 {
     rename v`i' age`i'    
 }
+collapse (mean) age*, by(year)
 
 gen fishery= "SFSBSB"
 gen common= "BLACK SEA BASS"
 gen state=""
 gen wave=.
-gen metric="2024 Numbers at Age"
+gen metric="Historical Mean Numbers of Age"
 gen source = "2025 Assessment"
 gen stock_abbrev = "SOUTH"
 gen species_itis =167687
 gen units = "Thousands"
 gen str data_version= "`vintage_string'"
-
-duplicates drop 
-sample $ndraws, count
-assert _N==$ndraws
-
-capture drop draw
 
 save "$misc_data_cd/`BSB_South_historical_filename'", replace
 
@@ -214,23 +212,19 @@ forvalues i = 1/8 {
     rename v`i' age`i'    
 }
 
+collapse (mean) age*, by(year)
+
 
 gen fishery= "SFSBSB"
 gen common= "BLACK SEA BASS"
 gen state=""
 gen wave=.
-gen metric="2024 Numbers at Age"
+gen metric="Historical Mean Numbers of Age"
 gen source = "2025 Assessment"
 gen stock_abbrev = "NORTH"
 gen species_itis =167687
 gen units = "Thousands"
 gen str data_version= "`vintage_string'"
-
-duplicates drop 
-sample $ndraws, count
-assert _N==$ndraws
-
-capture drop draw
 
 save "$misc_data_cd/`BSB_North_historical_filename'", replace
 
