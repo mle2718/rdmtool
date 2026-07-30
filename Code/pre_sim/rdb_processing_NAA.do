@@ -61,13 +61,13 @@ forvalues class =1/7{
 }
 assert year==2024
 
-collapse (median) age*, by(year)
+collapse (mean) age*, by(year)
 
 gen fishery= "SFSBSB"
 gen common= "SUMMER FLOUNDER"
 gen state=""
 gen wave=.
-gen metric="Historical Median Numbers of Age"
+gen metric="Historical Mean Numbers of Age"
 gen source = "2025 Assessment"
 gen stock_abbrev = ""
 gen species_itis =172735
@@ -125,7 +125,7 @@ forvalues class =1/7{
 }
 assert year==2024
 
-collapse (median) age*, by(year)
+collapse (mean) age*, by(year)
 
 
 
@@ -133,7 +133,7 @@ gen fishery= "SFSBSB"
 gen common= "SCUP"
 gen state=""
 gen wave=.
-gen metric="Historical Median Numbers of Age"
+gen metric="Historical Mean Numbers of Age"
 gen source = "2024 Assessment"
 gen stock_abbrev = ""
 gen species_itis =172735
@@ -191,13 +191,13 @@ gen year=2024
 forvalues i = 1/8 {
     rename v`i' age`i'    
 }
-collapse (median) age*, by(year)
+collapse (mean) age*, by(year)
 
 gen fishery= "SFSBSB"
 gen common= "BLACK SEA BASS"
 gen state=""
 gen wave=.
-gen metric="Historical Median Numbers of Age"
+gen metric="Historical Mean Numbers of Age"
 gen source = "2025 Assessment"
 gen stock_abbrev = "SOUTH"
 gen species_itis =167687
@@ -215,14 +215,14 @@ forvalues i = 1/8 {
     rename v`i' age`i'    
 }
 
-collapse (median) age*, by(year)
+collapse (mean) age*, by(year)
 
 
 gen fishery= "SFSBSB"
 gen common= "BLACK SEA BASS"
 gen state=""
 gen wave=.
-gen metric="Historical Median Numbers of Age"
+gen metric="Historical Mean Numbers of Age"
 gen source = "2025 Assessment"
 gen stock_abbrev = "NORTH"
 gen species_itis =167687
