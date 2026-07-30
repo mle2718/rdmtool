@@ -16,8 +16,7 @@
 #               "candidate_reg_set_1"; nothing is written directly here.
 # Dependencies: Sources project_rec_catch_final_revised_v3.R and
 #               project_rec_catch_batch_helpers_revised.R by absolute path
-#               into one developer's Desktop checkout. Packages data.table,
-#               fst, purrr, furrr, future, readr, here, plyr, dplyr.
+#               into one developer's Desktop checkout.
 # Pipeline:     Development/QA scratch - the candidate replacement for the
 #               Code/sim projection path. Not called by any wrapper.
 #

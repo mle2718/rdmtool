@@ -11,8 +11,7 @@
 #               output/ (directory listing only)
 # Outputs:      None directly. Each sourced per-state script writes its own
 #               output CSV.
-# Dependencies: Packages dplyr, magrittr, here. Same runtime prerequisites as
-#               Run_Model.R.
+# Dependencies: Same runtime prerequisites as Run_Model.R.
 # Pipeline:     Standalone operator utility. Not called by any wrapper and not
 #               referenced by app.R.
 #

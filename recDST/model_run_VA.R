@@ -31,8 +31,7 @@
 #               calibrated_model_stats_new.rds
 # Outputs:      output_VA_<Run_Name>_<timestamp>.csv
 # Dependencies: Sourced by Run_Model.R, which must already have defined
-#               `args`. Packages readr, dplyr, tidyr, feather, data.table,
-#               lubridate, stringr, furrr, future, here.
+#               `args`.
 # Pipeline:     Terminal stage. Reads the outputs of the Stata pre-sim stage
 #               and the R calibration stage; its own output is read by app.R.
 #

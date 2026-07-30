@@ -10,9 +10,8 @@
 # Outputs:      rdb_catch_per_trip_<data_version>.Rds (written locally and
 #               uploaded to Drive under the same name).
 # Dependencies: Sources Code/helpers/developer_setup.R, so the object
-#               `developer` must be set first. Packages tidyverse, haven,
-#               glue, googledrive, here. Requires a cached OAuth token in
-#               .secrets/ - run Code/helpers/googledrivesetup.R once first.
+#               `developer` must be set first. Requires a cached OAuth token
+#               in .secrets/ - run Code/helpers/googledrivesetup.R once first.
 # Pipeline:     Terminal step - nothing downstream in this repo reads its
 #               output. Intended to be gated by the model_wrapper.do toggle
 #               `Rpush_to_gdrive', but NO CALL TO THIS SCRIPT EXISTS in the

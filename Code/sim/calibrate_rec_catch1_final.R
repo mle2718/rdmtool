@@ -21,7 +21,7 @@
 #               reallocation settings through GLOBAL VARIABLES
 #               (rel_to_keep_<sp>, p_rel_to_keep_<sp> and siblings, written by
 #               that script's push_globals()). There is no argument-passing
-#               contract between the two files. Packages data.table, fst.
+#               contract between the two files.
 # Pipeline:     Inner loop of R calibration STEP 2. Sibling of
 #               calibrate_rec_catch0_optimized.R, from which it inherits
 #               safe_divide(), calc_prob_trip() and build_compare_table()

@@ -14,10 +14,9 @@
 # Outputs:      None (creates the data directory on disk if absent; defines
 #               the object sf.data.dir in the calling environment).
 # Dependencies: The object `developer` must already be set to one of "TP",
-#               "LCH", "ML", or "KB" before this file is sourced, and the
-#               here package must be attached. Sourced independently by each
-#               R script that needs a data path; it is NOT sourced by
-#               "R code wrapper.R".
+#               "LCH", "ML", or "KB" before this file is sourced. Sourced
+#               independently by each R script that needs a data path; it is
+#               NOT sourced by "R code wrapper.R".
 # Pipeline:     Setup stage. Stata twin of this file is
 #               developer_setup_stata.do, which sets the global $sfdatadir
 #               to the same locations. The four allowed developer values and

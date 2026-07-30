@@ -11,8 +11,7 @@
 # Inputs:       regs_<Run_Name>.csv
 # Outputs:      None directly. Each sourced per-state script writes its own
 #               output CSV.
-# Dependencies: Packages magrittr, data.table, lubridate, here, conflicted.
-#               Requires the R calibration stage to have completed, since the
+# Dependencies: Requires the R calibration stage to have completed, since the
 #               per-state scripts read its output.
 # Pipeline:     Entry point 3 of 3, invoked as
 #                   Rscript Run_Model.R <Run_Name>

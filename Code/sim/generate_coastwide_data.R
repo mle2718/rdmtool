@@ -15,9 +15,8 @@
 #               by extracting the text between "output_" and "_202".
 # Outputs:      One CSV per model into output_coastwide/ (but see the
 #               filename note in Section C).
-# Dependencies: Packages dplyr, stringr, readr, purrr, tidyr, here. Requires
-#               that the per-state projection runs have already completed and
-#               populated output/.
+# Dependencies: Requires that the per-state projection runs have already
+#               completed and populated output/.
 # Pipeline:     Standalone post-processing utility. Not called by any wrapper
 #               and not sourced by app.R; run by hand after a projection round.
 #

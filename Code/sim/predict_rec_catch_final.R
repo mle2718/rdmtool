@@ -23,7 +23,7 @@
 # Outputs:      The final_compare table of projected-vs-baseline differences.
 # Dependencies: Objects iterative_input_data_cd and input_data_cd from the
 #               calling environment - "R code wrapper.R" sources this file as
-#               STEP 3. Packages data.table, fst, readr.
+#               STEP 3.
 # Pipeline:     Last of the three R steps. Deliberately mirrors
 #               calibrate_rec_catch1_final.R so that baseline and projection
 #               are computed the same way and their difference is meaningful.

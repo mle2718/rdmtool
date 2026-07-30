@@ -10,7 +10,6 @@
 # Outputs:      None. Objects are left in the global environment for the
 #               companion predict/functions script to use.
 # Dependencies: Objects `st` and `dr` must exist in the calling environment.
-#               Packages magrittr, dplyr, feather or fst, readr, data.table.
 #
 # THE predict_rec_catch_data_read_* FAMILY (5 files). Each loads the inputs
 # for one state x draw of the projection, then leaves them in the global

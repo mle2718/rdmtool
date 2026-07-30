@@ -10,8 +10,8 @@
 # Inputs:       None.
 # Outputs:      None directly. Following the steps by hand writes a cached
 #               credential file into .secrets/.
-# Dependencies: Packages here, googledrive. Must be run interactively in
-#               RStudio - the drive_auth() step opens a browser.
+# Dependencies: Must be run interactively in RStudio - the drive_auth() step
+#               opens a browser.
 # Pipeline:     Setup stage, outside the pipeline. Not called by any wrapper
 #               and not sourced by any script. Run once per developer per
 #               machine. The scripts that consume the cached token are

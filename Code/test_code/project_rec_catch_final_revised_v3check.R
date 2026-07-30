@@ -9,7 +9,7 @@
 #               adopted.
 # Inputs:       Same as project_rec_catch_final_revised_v3.R.
 # Outputs:      Returned to the caller.
-# Dependencies: Packages data.table, fst, readr.
+# Dependencies:
 # Pipeline:     Development/QA scratch. Not called by any wrapper.
 # Dev paths:    1 hardcoded absolute path to a developer's local machine
 #               (C:\), at line 240 (the L_W_Conversion.csv default argument).

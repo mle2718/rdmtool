@@ -12,9 +12,7 @@
 # Outputs:      saved_regs/regs_<Run_Name>.csv (the submitted scenario), plus
 #               a message posted to an Azure Storage Queue, plus user
 #               downloads.
-# Dependencies: Packages shiny, shinyjs, shinyWidgets, dplyr, plotly, readr,
-#               stringr, magrittr, httr, jsonlite, openssl, uuid, here.
-#               Requires the environment variable AZURE_STORAGE_QUEUE_URL to
+# Dependencies: Requires the environment variable AZURE_STORAGE_QUEUE_URL to
 #               be set with a SAS-authenticated queue URL; without it,
 #               submitting a run fails.
 # Pipeline:     Terminal stage, and DECOUPLED from the model. The app does not

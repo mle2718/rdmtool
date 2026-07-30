@@ -14,7 +14,7 @@
 #               output under output_cd when asked to.
 # Dependencies: project_rec_catch_final_revised_v3.R must be sourced FIRST -
 #               read_projection_common_inputs() and compute_projection() are
-#               defined there, not here. Packages data.table, purrr, furrr.
+#               defined there, not here.
 # Pipeline:     Development/QA scratch - the candidate replacement for the
 #               Code/sim projection path. Driven by run_projection_final.R.
 #               Not called by any wrapper.

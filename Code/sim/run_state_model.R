@@ -21,9 +21,8 @@
 #               prefix the production model_run_*.R scripts write - so this
 #               file's output does not collide with, or get picked up by,
 #               anything reading the normal outputs)
-# Dependencies: Packages readr, dplyr, tidyr, feather, data.table, lubridate,
-#               stringr, furrr, future, here. Requires
-#               apply_directed_trips_regs() to be defined - see below.
+# Dependencies: Requires apply_directed_trips_regs() to be defined - see
+#               below.
 # Pipeline:     NOT ON ANY ACTIVE CODE PATH. Nothing sources this file and
 #               nothing calls run_state_model(). Run_Model.R sources the nine
 #               recDST/model_run_<ST>.R scripts instead, each of which defines

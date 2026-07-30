@@ -12,9 +12,8 @@
 #               packages against one another.
 # Inputs:       output/*.csv (per-state, per-policy model output)
 # Outputs:      all_coastwide_results.csv
-# Dependencies: Packages dplyr, readr, stringr, tidyr, here. Requires the
-#               per-state projection runs for every named policy to already
-#               exist in output/.
+# Dependencies: Requires the per-state projection runs for every named policy
+#               to already exist in output/.
 # Pipeline:     Development/QA scratch, downstream of the projection stage.
 #               Not called by any wrapper.
 #

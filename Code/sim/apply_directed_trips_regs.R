@@ -12,8 +12,7 @@
 # Inputs:       None. Operates on the data frame passed in, and reads the
 #               scenario regulation objects from the calling environment.
 # Outputs:      None. Returns the modified data frame.
-# Dependencies: Packages dplyr and lubridate (yday, ymd used unqualified).
-#               The scenario regulation objects (SFctFH_seas1_op and the like)
+# Dependencies: The scenario regulation objects (SFctFH_seas1_op and the like)
 #               must already exist in an enclosing environment - they are
 #               created dynamically by the caller's assign() loop, which is
 #               why they have no visible definition here.

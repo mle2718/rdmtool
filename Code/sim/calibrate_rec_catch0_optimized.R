@@ -20,7 +20,7 @@
 # Dependencies: The objects input_data_cd, iterative_input_data_cd and
 #               n_simulations must already exist in the calling environment -
 #               they are set by "R code wrapper.R", which sources this file as
-#               STEP 1. Packages data.table, arrow, readr, haven.
+#               STEP 1.
 # Pipeline:     First of the three R calibration/projection steps. Its sibling
 #               calibrate_rec_catch1_final.R reuses the same modeling logic
 #               with reallocation added.

@@ -10,8 +10,8 @@
 # Inputs:       Management Measures Template Updated.csv,
 #               output/*.csv (per-state, per-policy model output)
 # Outputs:      coastwide_results_compared2.csv
-# Dependencies: Packages dplyr, readr, stringr, tidyr, here. Requires the
-#               per-state projection runs to already exist in output/.
+# Dependencies: Requires the per-state projection runs to already exist in
+#               output/.
 # Pipeline:     Development/QA scratch, downstream of the projection stage.
 #               Not called by any wrapper.
 #

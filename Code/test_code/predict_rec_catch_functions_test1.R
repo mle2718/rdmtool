@@ -8,7 +8,7 @@
 #               calibration parameters) from the calling environment.
 # Outputs:      None. Defines functions.
 # Dependencies: A companion predict_rec_catch_data_read_* script must have run
-#               first to populate the environment. Package data.table.
+#               first to populate the environment.
 # Pipeline:     Development/QA scratch. Not called by any wrapper.
 #
 # HOW THIS DIFFERS FROM predict_rec_catch_functions_test2.R: substantially -

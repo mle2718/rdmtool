@@ -10,10 +10,8 @@
 #               reproduce both.
 # Inputs:       projected_mrip_catch_processed.xlsx
 # Outputs:      proj_catch_draws_raw_<ST>_<draw>.dta
-# Dependencies: Packages survey, copula, MASS, fitdistrplus, readxl, weights,
-#               wCorr, patchwork, Hmisc, tidyr, dplyr, ggplot2, writexl, plyr,
-#               conflicted, haven. The script checks for all of them up front
-#               and stops with a list of what is missing.
+# Dependencies: The script checks required packages up front and stops with a
+#               list of what is missing.
 # Pipeline:     Step 9b of model_wrapper.do, inside the catch_per_trip_project
 #               meta-toggle, launched with `rscript using'. Consumes the
 #               per-stratum means and standard errors from

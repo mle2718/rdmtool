@@ -29,8 +29,7 @@
 # Dependencies: Objects iterative_input_data_cd and input_data_cd must exist
 #               in the calling environment - set by "R code wrapper.R", which
 #               sources this file as STEP 2. Sources
-#               calibrate_rec_catch1_final.R repeatedly. Packages data.table,
-#               arrow, haven, readr, fst.
+#               calibrate_rec_catch1_final.R repeatedly.
 # Pipeline:     Second of the three R steps. Consumes PASS 0's comparison
 #               table; its output feeds the projection stage and is also what
 #               "check calibration convergence.do" filters down to 100 usable

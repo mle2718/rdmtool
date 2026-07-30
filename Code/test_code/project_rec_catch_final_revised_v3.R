@@ -14,7 +14,7 @@
 #               L_W_Conversion.csv, the per-draw projection catch files, and
 #               the calibration base outcomes and choice occasions.
 # Outputs:      Returned to the caller; run_one_projection_job() persists them.
-# Dependencies: Packages data.table, fst, readr. Must be sourced BEFORE
+# Dependencies: Must be sourced BEFORE
 #               project_rec_catch_batch_helpers_revised.R, which calls the two
 #               functions named above.
 # Pipeline:     Development/QA scratch - the candidate replacement for the
