@@ -218,6 +218,33 @@ n_psu <- function(df) {
   dplyr::n_distinct(df$psu_id)
 }
 
+sample_positive_mean <- function(mu, var_mu, min_mu = 1e-8) {
+  
+  mu     <- as.numeric(mu)[1]
+  var_mu <- as.numeric(var_mu)[1]
+  
+  if (!is.finite(mu) || mu <= 0) {
+    return(min_mu)
+  }
+  
+  if (!is.finite(var_mu) || var_mu <= 0) {
+    return(mu)
+  }
+  
+  sigma2_log <- log1p(var_mu / mu^2)
+  meanlog     <- log(mu) - 0.5 * sigma2_log
+  sdlog       <- sqrt(sigma2_log)
+  
+  sampled_mu <- stats::rlnorm(
+    n = 1,
+    meanlog = meanlog,
+    sdlog = sdlog
+  )
+  
+  max(sampled_mu, min_mu)
+}
+
+### Main functions and execution 
 
 run_species_copula_sim <- function(full_df,
                                    species_prefix,
@@ -305,8 +332,10 @@ run_species_copula_sim <- function(full_df,
     }
     
     while (i <= n_draws) {
-      sampled_mu <- max(1e-8, rnorm(1, mu, sqrt(var_mu)))
-      
+      sampled_mu <- sample_positive_mean(
+        mu = mu,
+        var_mu = var_mu
+      )      
       if (n_psu(df) <= 1) {
         sampled_theta <- theta_hat_single
       } else {
@@ -440,8 +469,15 @@ run_species_copula_sim <- function(full_df,
     }
     
     while (i <= n_draws) {
-      sampled_mu_keep <- max(1e-8, rnorm(1, mu_keep, sqrt(var_keep)))
-      sampled_mu_rel  <- max(1e-8, rnorm(1, mu_rel,  sqrt(var_rel)))
+      sampled_mu_keep <- sample_positive_mean(
+        mu = mu_keep,
+        var_mu = var_keep
+      )
+      
+      sampled_mu_rel <- sample_positive_mean(
+        mu = mu_rel,
+        var_mu = var_rel
+      )
       
       if (n_psu(df) <= 1) {
         sampled_theta_keep <- theta_hat_keep_single
@@ -540,8 +576,15 @@ run_species_copula_sim <- function(full_df,
     }
     
     while (i <= n_draws) {
-      sampled_mu_keep <- max(1e-8, rnorm(1, mu_keep, sqrt(var_keep)))
-      sampled_mu_rel  <- max(1e-8, rnorm(1, mu_rel,  sqrt(var_rel)))
+      sampled_mu_keep <- sample_positive_mean(
+        mu = mu_keep,
+        var_mu = var_keep
+      )
+      
+      sampled_mu_rel <- sample_positive_mean(
+        mu = mu_rel,
+        var_mu = var_rel
+      )
       
       if (n_psu(df) <= 1) {
         sampled_theta_keep <- theta_hat_keep_single
