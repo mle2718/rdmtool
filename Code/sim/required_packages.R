@@ -8,7 +8,7 @@
 #               and copula scripts in Code/sim and Code/pre_sim, which need
 #               additional packages (copula, VineCopula, fitdistrplus, fst,
 #               feather, data.table and others). Installing from this file
-#               alone is not sufficient to run the full pipeline.
+#               alone is not sufficient to run the full pipeline. Only to run app of Azure.
 # Inputs:       None.
 # Outputs:      None (installs packages into the user's R library).
 # Dependencies: None.
