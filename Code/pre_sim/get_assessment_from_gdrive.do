@@ -10,17 +10,19 @@
                .../flukeRDM/input_data (as currently written the script copies
                the whole folder; see the note on the disabled block below).
                Expected members, as named by the consumer
-               projected_catch_at_length.do: fit_NAA_NORTH_2024.csv,
-               fit_NAA_SOUTH_2024.csv, fit_proj_NAA_NORTH_2026.csv,
-               fit_proj_NAA_SOUTH_2026.csv, J1_2024Summer_Flounder.csv,
-               J1_2024Scup.csv, J1_2026Summer_Flounder.csv,
-               J1_2026Scup.csv. The years are literal and change each cycle.
- Outputs:      A verbatim copy into $misc_data_cd of each file above:
-               fit_NAA_NORTH_2024.csv, fit_NAA_SOUTH_2024.csv,
-               fit_proj_NAA_NORTH_2026.csv, fit_proj_NAA_SOUTH_2026.csv,
-               J1_2024Summer_Flounder.csv, J1_2024Scup.csv,
-               J1_2026Summer_Flounder.csv, J1_2026Scup.csv.
- Dependencies: Global $misc_data_cd (set in model_wrapper.do). Requires the
+               projected_catch_at_length.do: 
+				   fit_NAA_NORTH_2024.csv,
+				   fit_NAA_SOUTH_2024.csv,
+				   fit_proj_NAA_NORTH_2026.csv,
+				   fit_proj_NAA_SOUTH_2026.csv,
+				   J1_2024Summer_Flounder.csv,
+				   J1_2026Summer_Flounder.csv,
+				   J1_2024Scup.csv, 
+				   J1_2026Scup.csv. 
+			   The years are literal and change each cycle.
+ Outputs:      A verbatim copy into $misc_data_cd of each file above
+ Dependencies: Global $misc_data_cd (set in model_wrapper.do). 
+				Requires the
                Google Drive desktop client to be installed and the shared
                drive mounted at D: - the path below is a local filesystem
                path, not an API call, so no OAuth token is needed here.
@@ -33,17 +35,13 @@
    A developer whose client mounts the shared drive elsewhere must edit this. */
 local google_folder "D:/Shared drives/NMFS NEC READ SSB/socialsci/RecreationalDST/2028_management_cycle_data/flukeRDM/input_data"
 
-/* Note on the two `filestubs' definitions and the commented-out loop below:
-   this was the selective-copy approach - name the wanted files, resolve each
-   stub to the most recent matching file on Drive, and copy only those. It is
-   disabled, and both `filestubs' lines are therefore dead (the second would
-   overwrite the first in any case). The active code is the copy-everything
-   loop at the bottom of the file. Keep this in mind when reading: the file
-   names listed here document what the pipeline EXPECTS to find, but nothing
+/* The Selective copy approach (commented out):
+   name the wanted files, 
+   resolve each stub to the most recent matching file on Drive, and copy only those.
+   The file names listed here document what the pipeline EXPECTS to find, but nothing
    in the script currently verifies that those files arrived. */
 /* will need to adjust this to match actual file names*/
 local filestubs  "fit_NAA_NORTH fit_NAA_SOUTH fit_proj_NAA_NORTH fit_proj_NAA_SOUTH J1_2024Scup J1_2026Scup J1_2024Summer_Flounder J1_2026Summer_Flounder"
-local filestubs  "fit_NAA_NORTH fit_NAA_SOUTH"
 /*
 foreach s of local filestubs {
 	di "`s'"
