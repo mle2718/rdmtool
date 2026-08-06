@@ -24,7 +24,7 @@ if(any(grepl("ma", saved_regs$input))){
   save_regs <- saved_regs %>%
     dplyr::filter(grepl("ma", saved_regs$input))
   
-  source(here::here("recDST/model_run_MA.R"))
+  run_state_model(Run_Name, state = "ma")
 }
 
 ## Rhode Island
@@ -33,7 +33,7 @@ if(any(grepl("ri", saved_regs$input))){
   save_regs <- saved_regs %>%
     dplyr::filter(grepl("ri", saved_regs$input))
   
-  source(here::here("recDST/model_run_RI.R"))
+  run_state_model(Run_Name, state = "ri")
 }
 
 ## Connecticut
@@ -42,7 +42,7 @@ if(any(grepl("ct", saved_regs$input))){
   save_regs <- saved_regs %>%
     dplyr::filter(grepl("ct", saved_regs$input))
   
-  source(here::here("recDST/model_run_CT.R"))
+  run_state_model(Run_Name, state = "ct")
 }
 
 ## New York
@@ -51,7 +51,7 @@ if(any(grepl("ny", saved_regs$input))){
   save_regs <- saved_regs %>%
     dplyr::filter(grepl("ny", saved_regs$input))
   
-  source(here::here("recDST/model_run_NY.R"))
+  run_state_model(Run_Name, state = "ny")
 }
 
 ## New Jersey
@@ -60,7 +60,7 @@ if(any(grepl("nj", saved_regs$input))){
   save_regs <- saved_regs %>%
     dplyr::filter(grepl("nj", saved_regs$input))
   
-  source(here::here("recDST/model_run_NJ.R"))
+  run_state_model(Run_Name, state = "nj")
 }
 
 ## Deleware
@@ -69,7 +69,7 @@ if(any(grepl("de", saved_regs$input))){
   save_regs <- saved_regs %>%
     dplyr::filter(grepl("de", saved_regs$input))
   
-  source(here::here("recDST/model_run_DE.R"))
+  run_state_model(Run_Name, state = "de")
 }
 
 ## Maryland
@@ -78,7 +78,7 @@ if(any(grepl("md", saved_regs$input))){
   save_regs <- saved_regs %>%
     dplyr::filter(grepl("md", saved_regs$input))
   
-  source(here::here("recDST/model_run_MD.R"))
+  run_state_model(Run_Name, state = "md")
 }
 
 ## Virginia
@@ -87,7 +87,7 @@ if(any(grepl("va", saved_regs$input))){
   save_regs <- saved_regs %>%
     dplyr::filter(grepl("va", saved_regs$input))
   
-  source(here::here("recDST/model_run_VA.R"))
+  run_state_model(Run_Name, state = "va")
 }
 
 # North Carolina
@@ -96,7 +96,7 @@ if(any(grepl("nc", saved_regs$input))){
   save_regs <- saved_regs %>%
     dplyr::filter(grepl("nc", saved_regs$input))
 
-  source(here::here("recDST/model_run_NC.R"))
+  run_state_model(Run_Name, state = "nc")
 }
 
 
