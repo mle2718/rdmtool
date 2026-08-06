@@ -189,18 +189,9 @@ global figure_cd  "${sfdatadir}\figures"
 
 global log_dir "${input_code_cd}/logs" 
 
-/* BUG, flagged not fixed: the second mkdir below names $calib_catch_draws_cd,
-   which is never defined - the global set above is $calib_catch_data_cd.
-   ($calib_catch_draws_cd is the GroundfishRDM spelling, so this is a
-   copy-paste artifact.) The unset global expands to nothing, so the command
-   is a bare `mkdir', and `capture' swallows the resulting error silently.
-   Net effect: the calib_catch_draws directory is NOT created here. Runs
-   succeed anyway whenever the directory already exists, which is why this has
-   gone unnoticed; a genuinely fresh checkout would fail later, at the first
-   save into $calib_catch_data_cd. */
 /* make directories if necessary */
 capture mkdir $misc_data_cd
-capture mkdir $calib_catch_draws_cd
+capture mkdir $calib_catch_data_cd
 capture mkdir $proj_catch_data_cd
 capture mkdir $figure_cd
 capture mkdir $log_dir
@@ -302,6 +293,9 @@ if `assemblemriplists' {
 	do "$input_code_cd\MRIP_lists.do"
 	di "Lists of MRIP files assembled"
 }
+
+/* Break code if triplist global is empty. */
+assert "${triplist}"!=""
 
 	
 // 2) Estimate directed trips during calibration period
