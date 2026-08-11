@@ -446,8 +446,7 @@ Predicted trips, in millions, against percent change in harvest.
 **What this tells you.** This is the tool's estimate of how many fishing trips
 happen under your regulations. Because the tool decides trip by trip whether
 fishing is worth it, restrictive sets of rules produce fewer trips. That drop is part 
-of how a set of rules reduces harvest — and it also signals effects beyond the fishery, 
-since fewer trips means less spending at tackle shops, marinas, and for-hire businesses.
+of how a set of rules reduces harvest — and it also signals effects beyond the fishery.
 
 If two sets of rules produce similar harvest reductions but one keeps noticeably more trips
 on the water, that set of rules delivers the same conservation outcome with less disruption.
