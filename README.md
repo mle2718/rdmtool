@@ -16,7 +16,7 @@ The scientific core is Andrew (Lou) Carr-Harris's Recreation Demand Model: a
 discrete-choice model of angler trip-taking behavior, combined with copula-based
 simulation of correlated three-species catch per trip and Monte Carlo propagation of
 uncertainty across draws. The tool is deployed in Azure and made available to users at
-[recreationalfisheriesdst.com](https://recreationalfisheriesdst.com).
+[rec-tools-northeast.fisheries.noaa.gov](https:// rec-tools-northeast.fisheries.noaa.gov).
 
 This repository is the Mid-Atlantic sibling of **groundfishRDM** (cod and haddock, Gulf of
 Maine). The two share a common origin and a near-identical house style — same wrapper
@@ -119,11 +119,15 @@ once when setting up a machine. Prefer the consolidated list above.
 ## Running the Pipeline
 
 ### Prerequisite: set `developer`, then fix the hard-coded paths
+Both the Stata and R halves require an externally-set developer identifier that
+**is not defined anywhere in this repository**:
 
-The Stata and R halves require an externally-set developer identifier that **is not
-defined anywhere in this repository**: `$developer` in Stata (asserted in
-`Code/helpers/developer_setup_stata.do` against `"LCH"`, `"TP"`, `"ML"`, `"KB"`) and
-`developer` in R. It branches the data-root path global (`$sfdatadir`).
+- Stata: `$developer`, asserted in `Code/helpers/developer_setup_stata.do`
+- R: `developer`, asserted in `Code/helpers/developer_setup.R` via
+  `stopifnot(developer %in% c("TP","LCH","ML","KB"))`
+
+This value branches the data-root path global (`$sfdatadir` / `sf.data.dir`). It must be
+set with .Rprofile or profile.do before anything runs.
 
 Separately, `Code/sim/R code wrapper.R` hard-codes two developer-specific absolute paths
 in its own top-level assignments (`input_data_cd`, `iterative_input_data_cd`, lines
