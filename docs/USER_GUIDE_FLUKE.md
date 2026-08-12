@@ -28,7 +28,7 @@ fishing at all, and once they are on the water, the rules determine which fish
 they can keep and which they must release. Recreational harvest is the result of all those
 individual decisions together.
 
-That indirect link is what makes recreational measures hard to predict. A higher
+That indirect link is what makes recreational harvest hard to predict. A higher
 minimum size reduces harvest.  However, it also increases the 
 number of fish released, and some of those released fish die.  
 A more restrictive set of rules may make trips less appealing overall, so 
@@ -92,9 +92,9 @@ then adds up the results.
 Here is a simplified version of what happens for a single opportunity — 
 think of it as one person, on one day, deciding whether to go fishing.
 
-1. **Set the scene.** The tool assigns this person a trip cost, age, and avidity level and some personal
-characteristics, drawn at random from realistic distributions. Age and avidity matter because they affect 
-if people take or do not take a trip.
+1. **Set the scene.** The tool assigns this person a trip cost and some personal
+characteristics like age and avidity level, drawn at random from realistic distributions. 
+Age and avidity matter because they affect if people take or do not take a trip.
 
 2. **Figure out what they would catch.** It draws a number of summer flounder, black sea bass, and scup 
 from the catch-per-trip patterns for that state, time of year, and mode. Then it gives each individual fish 
