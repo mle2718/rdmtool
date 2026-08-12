@@ -39,8 +39,6 @@ catch them on the same trip. A regulation aimed at summer flounder changes what
 a trip looks like for black sea bass too, because it changes the overall appeal
 of going out. The tool handles all three species together for exactly this reason.
 
-This tool takes all of that into account at once.
-
 ### What the tool is built on
 
 Four kinds of information feed the tool.
