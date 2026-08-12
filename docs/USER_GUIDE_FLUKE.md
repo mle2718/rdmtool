@@ -236,7 +236,7 @@ regulations are always set separately by mode.
 
 [SCREENSHOT: the "Regulations combined or separated by mode?" dropdown with All Modes Combined selected]
 
-**Scup in Massachusetts.** Scup is Massachusetts is set by default to two seasons. 
+**Scup in Massachusetts.** Scup in Massachusetts is set by default to two seasons. 
 
 #### Adding more seasons
 
@@ -365,7 +365,9 @@ heading to sort.
 | **BSB Median % Change** | Median percent change in black sea bass harvest weight |
 | **Scup Median % Change** | Median percent change in scup harvest weight |
 
-These are the same numbers plotted in the figure above, in a form you can sort and read precisely. This is usually the fastest way to check whether a scenario delivers the reduction you need. Note that harvest here is measured in **weight**, not numbers of fish — which is the basis harvest limits are set on.
+These are the same numbers plotted in the figure above, in a form you can sort and read precisely. 
+This is usually the fastest way to check whether a scenario delivers the reduction you need. 
+Note that harvest here is measured in **weight**, not numbers of fish — which is the basis harvest limits are set on.
 
 [SCREENSHOT: summary table showing percent change columns for several runs and states]
 
@@ -392,8 +394,8 @@ of the fishing they get — the amount of money that would leave anglers exactly
 off as they were before.
 
 Negative values mean anglers are worse off, and the number is what it would take to 
-compensate them. Positive values mean they are better off. More restrictive sets of rules
-generally produce more negative values.
+compensate them so they are as well off as before. Positive values mean they are better off. 
+More restrictive sets of rules generally produce more negative values.
 
 **How to use it.** This figure shows the trade-off directly. Two sets of rules that
 deliver the same harvest reduction can differ substantially in what they cost anglers.
