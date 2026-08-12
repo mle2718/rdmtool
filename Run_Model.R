@@ -19,22 +19,6 @@
 #               external process. Reads only pre-existing files - it does not
 #               chain back to model_wrapper.do or "R code wrapper.R".
 #
-# KNOWN BROKEN - this path does not run as committed. Each per-state script
-# sources two files that do not exist at the paths given:
-#     source(here::here("Code/sim/predict_rec_catch_functions.R"))
-#     source(here::here("Code/sim/predict_rec_catch.R"))
-# The first exists only as Code/archive/predict_rec_catch_functions.R; the
-# second does not exist anywhere in the repo under that name - the closest
-# match is Code/sim/predict_rec_catch_final.R. The source() calls sit inside
-# the per-draw worker function, so a run fails on the first draw of the first
-# state attempted. This is consistent with a rename in Code/sim that did not
-# update the callers. The developers are aware; a fix may exist on an
-# unpushed branch.
-#
-# Note that Code/sim/run_state_model.R carries the SAME two broken source()
-# calls plus a third defect of its own, but it is not on this code path - the
-# model_run_*.R scripts define their own worker rather than calling
-# run_state_model().
 #
 # Note on `save_regs`: the per-state filter below assigns save_regs, but each
 # per-state script re-reads and re-filters regs_<Run_Name>.csv itself, so the
