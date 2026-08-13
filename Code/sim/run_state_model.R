@@ -23,11 +23,7 @@
 #               anything reading the normal outputs)
 # Dependencies: Requires apply_directed_trips_regs() to be defined - see
 #               below.
-# Pipeline:     NOT ON ANY ACTIVE CODE PATH. Nothing sources this file and
-#               nothing calls run_state_model(). Run_Model.R sources the nine
-#               recDST/model_run_<ST>.R scripts instead, each of which defines
-#               its own copy of this logic. Read this file as the intended
-#               direction of travel, not as what currently runs.
+# Pipeline:     This function is called by Run_Model.R 
 #
 # THREE DEFECTS, all left unfixed per this session's scope:
 #   1. apply_directed_trips_regs() is called below but never sourced anywhere
