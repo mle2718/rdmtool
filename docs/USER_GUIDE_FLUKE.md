@@ -28,7 +28,7 @@ fishing at all, and once they are on the water, the rules determine which fish
 they can keep and which they must release. Recreational harvest is the result of all those
 individual decisions together.
 
-That indirect link is what makes recreational measures hard to predict. A higher
+That indirect link is what makes recreational harvest hard to predict. A higher
 minimum size reduces harvest.  However, it also increases the 
 number of fish released, and some of those released fish die.  
 A more restrictive set of rules may make trips less appealing overall, so 
@@ -38,8 +38,6 @@ There is a further complication specific to these three species: anglers often
 catch them on the same trip. A regulation aimed at summer flounder changes what
 a trip looks like for black sea bass too, because it changes the overall appeal
 of going out. The tool handles all three species together for exactly this reason.
-
-This tool takes all of that into account at once.
 
 ### What the tool is built on
 
@@ -92,9 +90,9 @@ then adds up the results.
 Here is a simplified version of what happens for a single opportunity — 
 think of it as one person, on one day, deciding whether to go fishing.
 
-1. **Set the scene.** The tool assigns this person a trip cost, age, and avidity level and some personal
-characteristics, drawn at random from realistic distributions. Age and avidity matter because they affect 
-if people take or do not take a trip.
+1. **Set the scene.** The tool assigns this person a trip cost and some personal
+characteristics like age and avidity level, drawn at random from realistic distributions. 
+Age and avidity matter because they affect if people take or do not take a trip.
 
 2. **Figure out what they would catch.** It draws a number of summer flounder, black sea bass, and scup 
 from the catch-per-trip patterns for that state, time of year, and mode. Then it gives each individual fish 
@@ -238,7 +236,7 @@ regulations are always set separately by mode.
 
 [SCREENSHOT: the "Regulations combined or separated by mode?" dropdown with All Modes Combined selected]
 
-**Scup in Massachusetts.** Scup is Massachusetts is set by default to two seasons. 
+**Scup in Massachusetts.** Scup in Massachusetts is set by default to two seasons. 
 
 #### Adding more seasons
 
@@ -367,7 +365,9 @@ heading to sort.
 | **BSB Median % Change** | Median percent change in black sea bass harvest weight |
 | **Scup Median % Change** | Median percent change in scup harvest weight |
 
-These are the same numbers plotted in the figure above, in a form you can sort and read precisely. This is usually the fastest way to check whether a scenario delivers the reduction you need. Note that harvest here is measured in **weight**, not numbers of fish — which is the basis harvest limits are set on.
+These are the same numbers plotted in the figure above, in a form you can sort and read precisely. 
+This is usually the fastest way to check whether a scenario delivers the reduction you need. 
+Note that harvest here is measured in **weight**, not numbers of fish — which is the basis harvest limits are set on.
 
 [SCREENSHOT: summary table showing percent change columns for several runs and states]
 
@@ -394,8 +394,8 @@ of the fishing they get — the amount of money that would leave anglers exactly
 off as they were before.
 
 Negative values mean anglers are worse off, and the number is what it would take to 
-compensate them. Positive values mean they are better off. More restrictive sets of rules
-generally produce more negative values.
+compensate them so they are as well off as before. Positive values mean they are better off. 
+More restrictive sets of rules generally produce more negative values.
 
 **How to use it.** This figure shows the trade-off directly. Two sets of rules that
 deliver the same harvest reduction can differ substantially in what they cost anglers.
