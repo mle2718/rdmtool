@@ -23,15 +23,9 @@
                This script is the ONLY place these four globals are ever
                assigned. Unlike GroundfishRDM, whose model_wrapper.do pre-sets
                all four to single consolidated-file defaults before the
-               optional rebuild step, the flukeRDM wrapper provides no fallback.
-               Setting `assemblemriplists'=0 while leaving later steps enabled
-               therefore leaves the globals empty, and the downstream scripts
-               that read them (directed_trips_calibration.do,
-               catch_per_trip_calibration_part1.do and others) will silently
-               operate on nothing rather than erroring. The toggle currently
-               defaults ON, so this is latent rather than active.
-               The team is aware of this and plans to add the same fallback
-               defaults GroundfishRDM uses; it is deliberately NOT fixed here.
+               optional rebuild step.  model_wrapper.do includes an assert check
+			   for triplist that breaks code if triplist is empty.
+               This will be addressed in the next flukeRDM development cycle.
 *******************************************************************************/
 
 /* The accumulate idiom used four times below is worth reading once carefully.

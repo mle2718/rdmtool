@@ -26,9 +26,10 @@
 # Outputs:      output_MA_<Run_Name>_<timestamp>.csv
 # Dependencies: Sourced by Run_Model.R, which must already have defined
 #               `args`.
-# Pipeline:     Terminal stage. Reads the outputs of the Stata pre-sim stage
-#               and the R calibration stage; its own output is read by app.R.
-#
+# Pipeline:     Not in pipeline anymore. 
+# Notes:        The individual "model_run_<state>.R" are being refactored out in favor of run_state_model().
+#               After testing and after the documentation update, these individual model_run<state>.R files will be removed
+#               from the repository.
 # KNOWN BROKEN - see the source() calls inside get_predictions_out(). Both
 # named files are missing from Code/sim/, so this script fails on the first
 # draw. Details are commented at that line and in Run_Model.R's header.

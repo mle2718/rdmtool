@@ -17,7 +17,6 @@
 # Outputs:      output_<ST>_<Run_Name>_<timestamp>.csv
 # Dependencies: Requires apply_directed_trips_regs() to be defined - see
 #               below.
-#
 ################################################################################
 ################################################################################
 

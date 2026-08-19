@@ -5,7 +5,7 @@ title: Rec DST
 
 
 
-This shiny application was developed to make the Recreation Demand Model (RDM) for Summer Flounder, Black Sea Bass, and Scup directly accessible to Fisheries Managers. If you have questions, please reach out to Kimberly Bastille (kimberly.bastille@noaa.gov) and Andrew (Lou) Carr-Harris (andrew.carr-harris@noaa.gov).
+This shiny application was developed to make the Recreation Demand Model (RDM) for Summer Flounder, Black Sea Bass, and Scup directly accessible to Fisheries Managers. If you have questions, please reach out to the RecDST team at nefsc.recdst@noaa.gov.
 
 Details and meeting notes from the Recreational Demand Model Decision Support Tool Working Group can be found at [NOAA Fisheries](https://www.fisheries.noaa.gov/event/recreational-demand-model-decision-support-tool-working-group-summer-flounder-black-sea-bass). 
 
