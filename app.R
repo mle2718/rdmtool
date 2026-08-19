@@ -24,7 +24,7 @@
 #               file to any modeling script - the coupling is the shared
 #               saved_regs/ and output/ folders plus the queue.
 #
-# STRUCTURE. This is a single 5,100-line file with no module or file split, so
+# STRUCTURE. This is a large file with no module or file split, so
 # the section banners below are the primary means of navigating it:
 #
 #   Section A   UI definition                            (~line 10)
@@ -52,19 +52,14 @@
 # here silently breaks the corresponding model_run_<ST>.R script, because
 # nothing validates that the names a scenario supplies are the names the model
 # expects.
-#
-# Per this session's scope, app.R received a script header and section banners
-# only - no inline or function-level documentation, and no code changes.
 ################################################################################
 ################################################################################
 
 
-# Required packages - everything else uses package:: found in r/required_packages.R
+# Required packages
 library(shiny)
 library(shinyjs)
 library(dplyr)
-
-# Minor edit
 
 #### Start UI ####
 ################################################################################
@@ -93,7 +88,7 @@ ui <- fluidPage(
                         p("This may take a moment to load. Thank you for your patience"),
                         plotly::plotlyOutput(outputId = "ma_rhl_fig"),# Harvest
                         plotly::plotlyOutput(outputId = "ma_CV_fig"),# Angler Satis
-                        plotly::plotlyOutput(outputId = "ma_discards_fig"), # Disczrds)
+                        plotly::plotlyOutput(outputId = "ma_discards_fig"), # Discards)
                         plotly::plotlyOutput(outputId = "ma_totmort_fig"), # total mort
                         plotly::plotlyOutput(outputId = "ma_trips_fig") # Ntrips
                ),
@@ -102,7 +97,7 @@ ui <- fluidPage(
                         p("This may take a moment to load. Thank you for your patience"),
                         plotly::plotlyOutput(outputId = "ri_rhl_fig"),# Harvest
                         plotly::plotlyOutput(outputId = "ri_CV_fig"),# Angler Satis
-                        plotly::plotlyOutput(outputId = "ri_discards_fig"), # Disczrds)
+                        plotly::plotlyOutput(outputId = "ri_discards_fig"), # Discards)
                         plotly::plotlyOutput(outputId = "ri_totmort_fig"), # total mort
                         plotly::plotlyOutput(outputId = "ri_trips_fig") # Ntrips
                ), 
@@ -111,7 +106,7 @@ ui <- fluidPage(
                         p("This may take a moment to load. Thank you for your patience"),
                         plotly::plotlyOutput(outputId = "ct_rhl_fig"),# Harvest
                         plotly::plotlyOutput(outputId = "ct_CV_fig"),# Angler Satis
-                        plotly::plotlyOutput(outputId = "ct_discards_fig"), # Disczrds)
+                        plotly::plotlyOutput(outputId = "ct_discards_fig"), # Discards)
                         plotly::plotlyOutput(outputId = "ct_totmort_fig"), # total mort
                         plotly::plotlyOutput(outputId = "ct_trips_fig") # Ntrips
                ),
@@ -120,7 +115,7 @@ ui <- fluidPage(
                         p("This may take a moment to load. Thank you for your patience"),
                         plotly::plotlyOutput(outputId = "ny_rhl_fig"),# Harvest
                         plotly::plotlyOutput(outputId = "ny_CV_fig"),# Angler Satis
-                        plotly::plotlyOutput(outputId = "ny_discards_fig"), # Disczrds)
+                        plotly::plotlyOutput(outputId = "ny_discards_fig"), # Discards)
                         plotly::plotlyOutput(outputId = "ny_totmort_fig"), # total mort
                         plotly::plotlyOutput(outputId = "ny_trips_fig") # Ntrips
                ),
@@ -129,7 +124,7 @@ ui <- fluidPage(
                         p("This may take a moment to load. Thank you for your patience"),
                         plotly::plotlyOutput(outputId = "nj_rhl_fig"),# Harvest
                         plotly::plotlyOutput(outputId = "nj_CV_fig"),# Angler Satis
-                        plotly::plotlyOutput(outputId = "nj_discards_fig"), # Disczrds)
+                        plotly::plotlyOutput(outputId = "nj_discards_fig"), # Discards)
                         plotly::plotlyOutput(outputId = "nj_totmort_fig"), # total mort
                         plotly::plotlyOutput(outputId = "nj_trips_fig") # Ntrips
                ),
@@ -138,7 +133,7 @@ ui <- fluidPage(
                         p("This may take a moment to load. Thank you for your patience"),
                         plotly::plotlyOutput(outputId = "de_rhl_fig"),# Harvest
                         plotly::plotlyOutput(outputId = "de_CV_fig"),# Angler Satis
-                        plotly::plotlyOutput(outputId = "de_discards_fig"), # Disczrds)
+                        plotly::plotlyOutput(outputId = "de_discards_fig"), # Discards)
                         plotly::plotlyOutput(outputId = "de_totmort_fig"), # total mort
                         plotly::plotlyOutput(outputId = "de_trips_fig") # Ntrips
                ),
@@ -147,7 +142,7 @@ ui <- fluidPage(
                         p("This may take a moment to load. Thank you for your patience"),
                         plotly::plotlyOutput(outputId = "md_rhl_fig"),# Harvest
                         plotly::plotlyOutput(outputId = "md_CV_fig"),# Angler Satis
-                        plotly::plotlyOutput(outputId = "md_discards_fig"), # Disczrds)
+                        plotly::plotlyOutput(outputId = "md_discards_fig"), # Discards)
                         plotly::plotlyOutput(outputId = "md_totmort_fig"), # total mort
                         plotly::plotlyOutput(outputId = "md_trips_fig") # Ntrips
                ),
@@ -156,7 +151,7 @@ ui <- fluidPage(
                         p("This may take a moment to load. Thank you for your patience"),
                         plotly::plotlyOutput(outputId = "va_rhl_fig"),# Harvest
                         plotly::plotlyOutput(outputId = "va_CV_fig"),# Angler Satis
-                        plotly::plotlyOutput(outputId = "va_discards_fig"), # Disczrds)
+                        plotly::plotlyOutput(outputId = "va_discards_fig"), # Discards)
                         plotly::plotlyOutput(outputId = "va_totmort_fig"), # total mort
                         plotly::plotlyOutput(outputId = "va_trips_fig") # Ntrips
                ),
@@ -165,7 +160,7 @@ ui <- fluidPage(
                         p("This may take a moment to load. Thank you for your patience"),
                         plotly::plotlyOutput(outputId = "nc_rhl_fig"),# Harvest
                         plotly::plotlyOutput(outputId = "nc_CV_fig"),# Angler Satis
-                        plotly::plotlyOutput(outputId = "nc_discards_fig"),  # Disczrds)
+                        plotly::plotlyOutput(outputId = "nc_discards_fig"),  # Discards)
                         plotly::plotlyOutput(outputId = "nc_totmort_fig"), # total mort
                         plotly::plotlyOutput(outputId = "nc_trips_fig") # Ntrips
                ), 
@@ -342,18 +337,16 @@ server <- function(input, output, session) {
                    shinyjs::toggle(id = "SCUPncSeason2", anim = TRUE))
   
   #### Output$addSTATE ####
-  ############## MASSACHUSETTS ###########################################################
+  
   ##############################################################################
   ##############################################################################
-  # Section D: Server - per-state regulation input UI  (LONGEST SECTION)
+  # Section D: Server - per-state regulation input UI 
   #   Nine near-identical blocks, MA through NC, each rendering that state's
-  #   season, bag and size inputs plus its per-species mode selectors. Roughly
-  #   3,200 lines. Read one state to understand all nine; they differ only in
-  #   the state code embedded in each input ID and in the number of seasons
-  #   offered. See the input ID convention in the file header.
+  #   season, bag and size inputs plus its per-species mode selectors.  
   ##############################################################################
   ##############################################################################
 
+  ############## MASSACHUSETTS ###########################################################
   output$addMA <- renderUI({
     if(any("MA" == input$state)){
       fluidRow( 

@@ -19,12 +19,6 @@
 #               external process. Reads only pre-existing files - it does not
 #               chain back to model_wrapper.do or "R code wrapper.R".
 #
-#
-# Note on `save_regs`: the per-state filter below assigns save_regs, but each
-# per-state script re-reads and re-filters regs_<Run_Name>.csv itself, so the
-# object is not actually consumed. Compare compare_savedregs_output.R, which
-# additionally assign()s each regulation into the environment before sourcing;
-# this file does not.
 ################################################################################
 ################################################################################
 
@@ -51,13 +45,6 @@ saved_regs<- read.csv(here::here(paste0("saved_regs/regs_", args[1], ".csv")))
 # Section A: Source the per-state model for each state in the scenario
 ################################################################################
 ################################################################################
-
-# State selection is a substring test on the `input` column, whose values are
-# named like "sfma_bag1", "bsbnj_min2" and so on. grepl("ma", ...) is therefore
-# an unanchored match on the two-letter state code embedded in the input name,
-# not an exact comparison - worth knowing if input names are ever renamed,
-# since a new name that happens to contain another state's code would trigger
-# that state's block too.
 
 message("Run_Model.R: starting run '", args[1], "'. Each state present in the scenario is simulated in turn; this can take a long time per state.")
 
