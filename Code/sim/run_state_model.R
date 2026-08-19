@@ -1,9 +1,7 @@
 ################################################################################
 ################################################################################
 # Script:       run_state_model.R
-# Purpose:      Defines run_state_model(), a single parameterized replacement
-#               for the nine near-identical recDST/model_run_<ST>.R scripts.
-#               Same job as those files - build the regulation calendar for
+# Purpose:      Defines run_state_model(), build the regulation calendar for
 #               one state under a saved scenario, then run the projection
 #               across draws in parallel - but with the state as an argument
 #               instead of hardcoded, and with the per-state regulation logic
@@ -16,35 +14,10 @@
 #               base_outcomes_new_<ST>_<draw>_<mode>.CSV,
 #               n_choice_occasions_new_<ST>_<mode>_<draw>.feather,
 #               calibrated_model_stats_new.rds
-# Outputs:      output2_<ST>_<Run_Name>_<timestamp>.csv
-#               (note the "output2_" prefix, distinct from the "output_"
-#               prefix the production model_run_*.R scripts write - so this
-#               file's output does not collide with, or get picked up by,
-#               anything reading the normal outputs)
+# Outputs:      output_<ST>_<Run_Name>_<timestamp>.csv
 # Dependencies: Requires apply_directed_trips_regs() to be defined - see
 #               below.
-# Pipeline:     NOT ON ANY ACTIVE CODE PATH. Nothing sources this file and
-#               nothing calls run_state_model(). Run_Model.R sources the nine
-#               recDST/model_run_<ST>.R scripts instead, each of which defines
-#               its own copy of this logic. Read this file as the intended
-#               direction of travel, not as what currently runs.
 #
-# THREE DEFECTS, all left unfixed per this session's scope:
-#   1. apply_directed_trips_regs() is called below but never sourced anywhere
-#      in the repo. It is defined in Code/sim/apply_directed_trips_regs.R,
-#      which no script sources. Calling run_state_model() as committed raises
-#      "could not find function".
-#   2. and 3. The two source() calls further down name
-#      Code/sim/predict_rec_catch_functions.R and Code/sim/predict_rec_catch.R.
-#      Neither exists at that path - the first is only in Code/archive/, the
-#      second does not exist under that name anywhere (Code/sim/ has
-#      predict_rec_catch_final.R). The nine model_run_*.R scripts carry the
-#      same two broken calls, so this is a repo-wide stale reference from a
-#      rename in Code/sim, not a defect unique to this file.
-#
-# Also note two settings that look like leftover test configuration rather
-# than production values: workers = 3 (the model_run_*.R scripts use 34) and
-# a draw range of 1:5 with the 1:100 line commented out directly above it.
 ################################################################################
 ################################################################################
 
@@ -71,7 +44,7 @@
 #' }
 run_state_model <- function(state, Run_Name) {
   
-  #Run_Name <- args[1]
+  Run_Name <- args[1]
   
   saved_regs <- read.csv(here::here(paste0("saved_regs/regs_", Run_Name, ".csv")))
   
@@ -143,6 +116,7 @@ run_state_model <- function(state, Run_Name) {
   # anywhere in the repo. It lives in Code/sim/apply_directed_trips_regs.R.
   # This is where the per-state case_when chains that model_run_*.R inlines
   # were factored out to - the whole point of this refactor.
+  source(here::here(Code/sim/apply_directed_trips_regs.R))
   directed_trips <- apply_directed_trips_regs(directed_trips, state)
   
   # ---- Parallel predictions ----
@@ -254,7 +228,6 @@ run_state_model <- function(state, Run_Name) {
     scup_size_data2 <- scup_size_data %>% dplyr::filter(draw == x) %>% dplyr::select(-draw)
     
     # ---- Run predict catch ----
-    # DEFECTS 2 and 3 (see header): neither file exists at these paths.
     source(here::here("Code/sim/predict_rec_catch_functions.R"))
     source(here::here("Code/sim/predict_rec_catch.R"))
     
