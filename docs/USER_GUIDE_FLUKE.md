@@ -147,12 +147,14 @@ are not modeled individually, the catch and size distributions have these attrib
 
 ### Getting Started
 
-The app opens with two tabs across the top.
+The app opens with three tabs across the top.
 
 **Summary Page** is where you look at results. It shows every model run that has been completed, both 
 coastwide and state by state.
 
 **Regulation Selection** is where you build a new scenario and submit it.
+
+**Results** is where you can combine any completed model runs for each state to see the summed estimates of all model results. 
 
 Two things to know before you start.
 
@@ -164,12 +166,17 @@ regulations and puts your run in a queue. The model runs elsewhere and takes a s
 time — each state is a separate job. Your results appear on the summary page once it finishes, which
  means you submit, go do something else, and come back later.
 
-[SCREENSHOT: the two main tabs at the top of the app, with the Summary Page open]
+![Summary page showing Median change in harvest for all states and a summary table showing median percent change.](images/SummaryPage.png)
+
+![Regulation selection tab where users select regulation scenarios.](images/RegulationSelection.png)
+
+![Results tab that calculates summed results based on the regulations selected for each state.](images/Results.png)
+
 
 ### Building a Scenario: the Regulation Selection Tab
 
 The instructions at the top of this tab lay out the sequence: name your policy, 
-pick your states, set your regulations, and click Run Me. Take them in that order 
+pick your state(s), set your regulations, and click Run Me. Take them in that order 
 — the regulation controls do not appear until you have selected a state.
 
 #### Step 1: Name your run
@@ -181,20 +188,21 @@ you will recognize. Each run needs a different name.
 #### Step 2: Choose your states
 
 Below the name box is a row of checkboxes: **MA, RI, CT, NY, NJ, DE, MD, VA, NC**.
-Tick every state you want in this run.
+Select every state you want in this run.
 
-When you tick a state, a colored panel of regulation controls appears further down 
-the page for that state. Tick several and you get several panels, each in its own 
-color. Untick a state and its panel disappears.
+When you select a state, a colored panel of regulation controls appears further down 
+the page for that state. Select several and you get several panels, each in its own 
+color. Unselect a state and its panel disappears.
 
 Selecting more states means a longer wait for results, since each state is modeled separately.
 
-[SCREENSHOT: run name box and the row of state checkboxes]
+![Regulation selection tab with Policy name is AB1 and Deleware, Maryland, and Virginia are selected.](images/RegulationSelectionNamed.png)
+
 
 #### Step 3: Set the regulations
 
 Each state's panel is laid out in three columns:**Summer Flounder**, **Black Sea Bass**,
-and **Scup.** We  pre-loaded current regulations.  If you only want to test one
+and **Scup**. We  pre-load current regulations. If you only want to test one
 change, change that one control and leave the rest alone.
 
 The walkthrough below uses **Massachusetts** as the example. Every state works
@@ -206,17 +214,17 @@ this section lists those differences.
 **The three modes.** Regulations are set separately for **For Hire**, **Private**, 
 and **Shore**. Each gets its own season dates, bag limit, and minimum size.
 
-**Setting a season.** A season is a slider with two handles running from January 1 
-to December 31. Drag the left handle to the opening date and the right handle to
-the closing date; the dates display as month and day. Unlike the fishing-year species 
+**Setting a season.** A season is a calendar dropdown with two handles one for the opening day 
+and one for closing day. All dates inbetween these two dates will be assumed open. Unlike the fishing-year species 
 elsewhere in the region, these seasons run on the calendar year.
 
-**Setting a bag limit.** Type a number into the Bag Limit box — the fish per angler per day.
+**Setting a bag limit.** Type a number into the Bag Limit box — the number of fish kept per angler per day.
 
 **Setting a minimum size.** Drag the Min Length slider. It moves in **half-inch steps**,
 so 17.5 inches is available as well as 17 and 18.
 
-[SCREENSHOT: a season slider, bag limit box, and minimum length slider for one species and mode]
+![MA summer flounder regulations sliders and buttons.](images/SlidersMA.png)
+
 
 **Summer flounder in Massachusetts.** Three blocks appear, one per mode, each with 
 a season, bag limit, and minimum size. 
@@ -232,9 +240,7 @@ the same across modes. It is fewer controls to set and fewer chances to make a m
 Switching between the two swaps the controls in place.
 
 Not every state and species offers this dropdown. Where it does not appear,
-regulations are always set separately by mode.
-
-[SCREENSHOT: the "Regulations combined or separated by mode?" dropdown with All Modes Combined selected]
+regulations are already set separately by mode.
 
 **Scup in Massachusetts.** Scup in Massachusetts is set by default to two seasons. 
 
@@ -251,7 +257,7 @@ does not commit you to using it.
 Each state and species has a maximum number of seasons, listed in the table below.
 Once you have used them, the Add Season button has nothing further to reveal.
 
-[SCREENSHOT: the Add Season button and the additional season block it reveals]
+![MA summer flounder regulations sliders and buttons where add season has been selected so season 2 options display.](images/MAaddseason.png)
 
 #### How seasons and closures are handled
 
@@ -281,8 +287,6 @@ After one click, a message confirms your regulations were saved.
 To submit another scenario, change the run name first, then adjust your regulations
 and click Run Me again.
 
-[SCREENSHOT: the Run Me button and the confirmation message]
-
 #### How states differ
 
 Every state's panel works the way Massachusetts does. These are the differences.
@@ -309,12 +313,20 @@ Below that is a second row of tabs — one per state, plus a Regulations tab —
 you can look at a single state in detail.
 
 **Everything on this page is measured against the status quo run.** The tool compares
-each of your scenarios against a baseline run whose name contains "SQ." If no such
-run is present, the percent changes cannot be calculated and the figures will be empty.
-If your comparisons look wrong or missing, that is the first thing to check.
+each of your scenarios against a baseline run named "SQ." 
 
-[SCREENSHOT: the Summary Page showing the coastwide figure, the summary table, and
-the row of state tabs beneath]
+![Summary page showing Median change in harvest for all states and a summary table showing median percent change.](images/SummaryPage.png)
+
+The Results tab has a panel on the left with all states. To explore the results, select a policy for each state or group of states you
+would like to see results for. Once selected, click the Calculate button. This button provides the outputs summed across states with policies selected.
+
+The dropdown menu contains all of the completed model runs. If you do not see the one you are looking for it may be because
+that model hasn't completed. Come back to it at a later time and the Policy should be available. 
+
+The results show median harvest weight in pounds and the percent change from the status quo, angler satisfaction, predicted trips,
+median discard weight and median dead discard weight in pounds as well as a table of the regulations for the selected policies.
+
+![Results tab that calculates summed results based on the regulations selected for each state.](images/Results.png)
 
 ---
 
@@ -330,148 +342,8 @@ Zero means the scenario produces the same harvest as current regulations. Negati
 values are reductions; positive values are liberalizations. This is deliberate —
 it lets you see, for any given harvest change, what else comes with it.
 
-### The Coastwide Harvest Change Figure
-
-At the top of the Summary Page is a figure titled **Percentage change in Recreational Harvest By State**.
-It is divided into small panels, one per state. Within each panel, the three species
-are spread along the horizontal axis and the vertical axis shows the median percent
-change in harvest. Each point is one model run, labeled with its run name. A horizontal
-line marks zero.
-
-**How to read it.** Find your run's label. Points below the zero line are reductions
-in harvest relative to the status quo; points above it are increases. Reading across
-the state panels shows you how the same set of rules plays out in different places — a 
-coastwide measure rarely produces the same percent change everywhere, because states
-differ in their current regulations, their stock availability, and their mix of modes.
-
-Reading across species within a panel shows you the spillovers. A set of rules aimed at
-summer flounder will usually move black sea bass and scup harvest too, because changing
-the appeal of a trip changes how many trips happen at all.
-
-**Hover over any point** to see the underlying numbers.
-
-[SCREENSHOT: coastwide harvest change figure with panels for each state]
-
-### The Summary Table
-
-Directly below is a sortable table with one row per state and run. Click any column
-heading to sort.
-
-| Column | What it shows |
-|---|---|
-| **State** | The state the row refers to |
-| **Run Name** | The name you gave the run |
-| **SF Median % Change** | Median percent change in summer flounder harvest weight from the status quo |
-| **BSB Median % Change** | Median percent change in black sea bass harvest weight |
-| **Scup Median % Change** | Median percent change in scup harvest weight |
-
-These are the same numbers plotted in the figure above, in a form you can sort and read precisely. 
-This is usually the fastest way to check whether a scenario delivers the reduction you need. 
-Note that harvest here is measured in **weight**, not numbers of fish — which is the basis harvest limits are set on.
-
-[SCREENSHOT: summary table showing percent change columns for several runs and states]
-
-### The State Tabs
-
-Each state tab holds five figures for that state, stacked top to bottom. All five share 
-the same horizontal axis — percent change in harvest from the status quo — and all but
-the first are split into panels by species.
-
-#### 1. Percentage change in Recreational Harvest
-
-The same figure as the coastwide one, narrowed to this state. It is repeated here so 
-you have the harvest change in front of you while reading the four figures below it.
-
-#### 2. Angler Satisfaction
-
-Angler satisfaction in millions of dollars, on the vertical axis, against percent 
-change in harvest.
-
-**What the dollar figure means.** This measures how much better or worse off anglers
-are under your regulations compared with baseline conditions, in dollars. It is not revenue,
-and it is not what anglers spend. It is the dollar value of the change in the quality 
-of the fishing they get — the amount of money that would leave anglers exactly as well
-off as they were before.
-
-Negative values mean anglers are worse off, and the number is what it would take to 
-compensate them so they are as well off as before. Positive values mean they are better off. 
-More restrictive sets of rules generally produce more negative values.
-
-**How to use it.** This figure shows the trade-off directly. Two sets of rules that
-deliver the same harvest reduction can differ substantially in what they cost anglers.
-If you must reduce harvest by a set percentage, this identifies which way of getting
-there costs anglers the least. Look for the point that sits highest on the satisfaction
-axis among the options that meet your harvest requirement.
-
-The species panels matter here. A set of rules can be nearly costless for scup while being 
-expensive for summer flounder, because anglers value the two so differently.
-
-[SCREENSHOT: angler satisfaction figure with panels for each species]
-
-#### 3. Discards
-
-The weight of fish released, in millions of pounds, against percent change in harvest.
-
-**What this is.** These are all released fish, not just the ones that die. It is the 
-total weight anglers put back.
-
-**Why it matters.** Discards are the side effect of restriction. Raising a minimum size
-reliably reduces harvest, but the fish do not disappear — they get caught and released 
-instead. If a scenario delivers its harvest reduction while sending discards sharply upward,
-it is achieving the reduction by making anglers throw more fish back, and a share of those
-will not survive. That has a conservation cost that the harvest number alone does not show.
-
-[SCREENSHOT: discards figure with panels for each species]
-
-#### 4. Total Mortality
-
-Total mortality against percent change in harvest.
-
-**What this is.** Total mortality is harvest plus dead discards — everything the 
-recreational fishery removes. It is calculated by applying discard mortality rates 
-to the released fish.
-
-**Why it matters.** This is the number that reflects the fishery's actual removals. 
-Harvest and total mortality usually move together, but not always by the same amount. 
-A set of rules that cuts harvest hard by raising the minimum size can leave total mortality 
-nearly flat, because the fish that stopped being landed are now being released, and some 
-of them die anyway. 
-
-[SCREENSHOT: total mortality figure with panels for each species]
-
-#### 5. Number of Trips
-
-Predicted trips, in millions, against percent change in harvest.
-
-**What this tells you.** This is the tool's estimate of how many fishing trips
-happen under your regulations. Because the tool decides trip by trip whether
-fishing is worth it, restrictive sets of rules produce fewer trips. That drop is part 
-of how a set of rules reduces harvest — and it also signals effects beyond the fishery.
-
-If two sets of rules produce similar harvest reductions but one keeps noticeably more trips
-on the water, that set of rules delivers the same conservation outcome with less disruption.
-
-[SCREENSHOT: predicted trips figure with panels for each species]
-
-### The Regulations Tab
-
-The last tab in the state row is **Regulations**. It has two parts.
-
-**A table of every submitted scenario**, showing the run name, state, species, mode,
-bag limit, minimum size, and season dates. Where you used the All Modes Combined option,
-the mode reads "All modes." Seasons you left with a zero bag limit are left out.
-Use this to confirm exactly what a run contained — particularly useful when you 
-come back to a run submitted weeks earlier, or when you are comparing someone else's
-run with your own.
-
-**A download control.** The dropdown lists every completed result file by state 
-and run name. Pick one and click **Download Selected File** to save the full results 
-to your computer. The download contains every simulation of every measure, not just 
-the medians shown in the figures — which is what you want if you need to build your
-own summary, put results into a memo or a briefing document, or look at a measure
-the app does not display.
-
-[SCREENSHOT: the Regulations tab showing the file dropdown, download button, and regulations table]
+Once you have a few policy scenarios that meet the required percent change, explore those policies deeper using the 
+Results tab. See how those individual policies add up with other states. 
 
 ### Understanding Uncertainty in Your Results
 
@@ -496,9 +368,9 @@ came in higher, half came in lower. A median is used rather than an average beca
 a few extreme draws pull an average around, while the median stays put.
 
 **How the percent changes are calculated.** The tool does not compare one summary
-number against another. It compares your scenario against the status quo run **draw by draw**
-— draw 1 of your scenario against draw 1 of the status quo, draw 2 against draw 2, and so on
-— which produces 100 percent changes. What you see is the median of those. This matters 
+number against another. It compares your scenario against the status quo run **draw by draw**. 
+This means draw 1 of your scenario is compared against draw 1 of the status quo, draw 2 against draw 2, and so on. 
+This produces 100 percent changes. What you see is the median of those. This matters 
 because it holds the uncertain inputs constant on both sides of each comparison. 
 The percent change you are reading is the effect of the regulations, with the 
 year-to-year uncertainty removed from the comparison rather than left to muddy it.
@@ -510,8 +382,7 @@ When two scenarios differ by a percentage point or two, that difference is small
 relative to what the tool can resolve, and the two should be treated as roughly 
 equivalent. Differences of several percentage points or more are meaningful.
 
-If you need the full spread rather than the middle, download the result file from 
-the Regulations tab. Every one of the 100 simulations is in there.
+If you need the full spread rather than the middle, download the result file. Every one of the 100 simulations is in there.
 
 ---
 
