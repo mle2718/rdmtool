@@ -23,7 +23,7 @@ understand the results.
 
 Unlike Commercial regulations, recreational regulations work indirectly. Managers 
 cannot set recreational harvest the way they set a quota. Instead managers set seasons, 
-bag limits, and minimum sizes, and anglers respond deciding whether to go
+bag limits, and minimum sizes, and anglers respond by deciding whether to go
 fishing at all, and once they are on the water, the rules determine which fish 
 they can keep and which they must release. Recreational harvest is the result of all those
 individual decisions together.
