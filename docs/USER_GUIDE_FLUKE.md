@@ -23,7 +23,7 @@ understand the results.
 
 Unlike Commercial regulations, recreational regulations work indirectly. Managers 
 cannot set recreational harvest the way they set a quota. Instead managers set seasons, 
-bag limits, and minimum sizes, and anglers respond — they decide whether to go
+bag limits, and minimum sizes, and anglers respond deciding whether to go
 fishing at all, and once they are on the water, the rules determine which fish 
 they can keep and which they must release. Recreational harvest is the result of all those
 individual decisions together.
@@ -32,7 +32,7 @@ That indirect link is what makes recreational harvest hard to predict. A higher
 minimum size reduces harvest.  However, it also increases the 
 number of fish released, and some of those released fish die.  
 A more restrictive set of rules may make trips less appealing overall, so 
-fewer anglers go — which reduces mortality further.
+fewer anglers go further reducing mortality.
 
 There is a further complication specific to these three species: anglers often
 catch them on the same trip. A regulation aimed at summer flounder changes what
@@ -43,16 +43,16 @@ of going out. The tool handles all three species together for exactly this reaso
 
 Four kinds of information feed the tool.
 
-**What anglers value.** In 2022, we survey went out to anglers along the coast from Massachusetts to North Carolina. 
+**What anglers value.** In 2022, we surveyed anglers along the coast from Massachusetts to North Carolina. 
 Each person was shown pairs of hypothetical fishing trips that differed in what the trip would cost and in 
-how many summer flounder, black sea bass, and scup they would keep or have to release — and was asked which trip 
+how many summer flounder, black sea bass, and scup they would keep or have to release. We simply asked which trip 
 they preferred, or whether they would rather do something other than saltwater fishing. These preferences are the behavioral engine 
-of the tool.  You can view a sample of the [survey](SFSBSBSurvey2022.pdf). 
+of the tool. You can view a sample of the [survey](SFSBSBSurvey2022.pdf). 
 
 Those answers reveal a great deal. Anglers value keeping a fish far more than catching and releasing one — for 
 summer flounder, by roughly a factor of twelve. Of the three species, summer flounder is worth the most:
 the first one kept on a trip is worth about \$35 to a typical angler, against about \$15 for the first black sea bass and 
-well under a dollar for a scup. Each additional fish is worth less than the one before it, so the fifth fish in the box 
+well under a dollar for scup. Each additional fish is worth less than the one before it, so the fifth fish in the cooler 
 does not add nearly as much as the first.
 
 The survey also shows that summer flounder and black sea bass act as **substitutes**. Keeping more black sea bass 
@@ -60,7 +60,7 @@ makes each summer flounder worth slightly less, and the reverse. This is why the
 one connected fishery rather than three separate ones.
 
 **What anglers actually catch.** Historical catch and effort estimates from the Marine Recreational
-Information Program (MRIP) tell us how many trips are taken, when, and by which mode.  It 
+Information Program (MRIP) tell us how many trips are taken, when, and by which mode (for hire boat, private boat, or shore).  It 
 also tells us how many Summer Flounder, Scup, and Black Sea Bass a trip typically catches. This is where  observed 
 variability in trip outcomes comes from; for example many trips catch few fish, 
 and a small number catch many.  We have launched the [RecDST data dashboard](https://connect.fisheries.noaa.gov/content/c257deee-a657-4c10-be8a-92827cb5bdfe/)
@@ -72,7 +72,7 @@ great deal for recreational management, because how much a minimum size limit
 affects anglers depends entirely on how many fish in the water are near that size.
 Combined with historical information about which sizes anglers actually catch, 
 this tells the tool what a typical catch looks like.  We know that recreational anglers 
-are good at catching fish -- we adjust historical catch to take account changes in biomass. For example, if the 
+are good at catching fish so we adjust historical catch to take account changes in biomass. For example, if the 
 stock assessment contains a very large 3-year old class of fish in 2025, then in 2026, those 4-year old
 fish will be a bit longer and the DST accounts for this.
 
