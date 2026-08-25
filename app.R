@@ -1,12 +1,76 @@
+################################################################################
+################################################################################
+# Script:       app.R
+# Purpose:      The Recreational Decision Support Tool (recDST) Shiny
+#               application. Two jobs: it collects a candidate set of
+#               regulations - season dates, bag limits and minimum sizes, per
+#               state, mode and species - and submits them as a model run; and
+#               it displays the results of runs that have already completed.
+# Inputs:       output/output_<ST>_<Run_Name>_<timestamp>.csv (results written
+#               by the per-state projection scripts). Reads whatever is
+#               present in output/ at the time of the request.
+# Outputs:      saved_regs/regs_<Run_Name>.csv (the submitted scenario), plus
+#               a message posted to an Azure Storage Queue, plus user
+#               downloads.
+# Dependencies: Requires the environment variable AZURE_STORAGE_QUEUE_URL to
+#               be set with a SAS-authenticated queue URL; without it,
+#               submitting a run fails.
+# Pipeline:     Terminal stage, and DECOUPLED from the model. The app does not
+#               run the model itself and does not call Run_Model.R. Submitting
+#               a scenario writes the regulation CSV and enqueues a job
+#               message; a separate worker outside this repo picks the message
+#               up and runs the model. The app then reads result files that
+#               appear in output/. There is therefore no code path from this
+#               file to any modeling script - the coupling is the shared
+#               saved_regs/ and output/ folders plus the queue.
+#
+# STRUCTURE. This is a large file with no module or file split, so
+# the section banners below are the primary means of navigating it:
+#
+#   Section A   UI definition                            (~line 10)
+#   Section B   Server: constants and defaults           (~line 200)
+#   Section C   Server: dynamic season show/hide toggles (~line 245)
+#   Section D   Server: per-state regulation input UI    (~line 315)
+#   Section E   Server: summary tab data and tables      (~line 3590)
+#   Section F   Server: figure helper functions          (~line 3715)
+#   Section G   Server: per-state result figures         (~line 3995)
+#   Section H   Server: scenario submission and enqueue  (~line 4225)
+#   Section I   Server: result file browsing and download(~line 5125)
+#
+# Section D is roughly 3,200 lines - about two thirds of the file - and is
+# nine near-identical blocks, one per state, each building that state's
+# regulation inputs (output$addMA, output$addRI, ... output$addNC) plus its
+# per-species mode selectors. The blocks differ in the state code embedded in
+# every input ID and in how many seasons each state offers. Reading one state
+# is sufficient to understand all nine.
+#
+# INPUT ID CONVENTION, which is what ties this file to the rest of the
+# pipeline: input IDs are named <SPECIES><state><MODE>_<field>, for example
+# SFmaFH_seas1_op. Those exact names are written into
+# saved_regs/regs_<Run_Name>.csv as the `input` column, and the per-state
+# model scripts recreate them as variables with assign(). Renaming an input ID
+# here silently breaks the corresponding model_run_<ST>.R script, because
+# nothing validates that the names a scenario supplies are the names the model
+# expects.
+################################################################################
+################################################################################
 
-# Required packages - everything else uses package:: found in r/required_packages.R
+
+# Required packages
 library(shiny)
 library(shinyjs)
 library(dplyr)
 
-# Minor edit
-
 #### Start UI ####
+################################################################################
+################################################################################
+# Section A: UI definition
+#   Summary Page tab, nine per-state tabs, a Regulations tab and the
+#   Regulation Selection tab. The per-state tabs are thin - they mostly call
+#   uiOutput() placeholders that Section D fills in from the server.
+################################################################################
+################################################################################
+
 ui <- fluidPage(
   useShinyjs(),
   titlePanel("Recreational Fisheries Decision Support Tool for Summer Flounder, Scup, and Black Sea Bass"),
@@ -24,7 +88,7 @@ ui <- fluidPage(
                         p("This may take a moment to load. Thank you for your patience"),
                         plotly::plotlyOutput(outputId = "ma_rhl_fig"),# Harvest
                         plotly::plotlyOutput(outputId = "ma_CV_fig"),# Angler Satis
-                        plotly::plotlyOutput(outputId = "ma_discards_fig"), # Disczrds)
+                        plotly::plotlyOutput(outputId = "ma_discards_fig"), # Discards)
                         plotly::plotlyOutput(outputId = "ma_totmort_fig"), # total mort
                         plotly::plotlyOutput(outputId = "ma_trips_fig") # Ntrips
                ),
@@ -33,7 +97,7 @@ ui <- fluidPage(
                         p("This may take a moment to load. Thank you for your patience"),
                         plotly::plotlyOutput(outputId = "ri_rhl_fig"),# Harvest
                         plotly::plotlyOutput(outputId = "ri_CV_fig"),# Angler Satis
-                        plotly::plotlyOutput(outputId = "ri_discards_fig"), # Disczrds)
+                        plotly::plotlyOutput(outputId = "ri_discards_fig"), # Discards)
                         plotly::plotlyOutput(outputId = "ri_totmort_fig"), # total mort
                         plotly::plotlyOutput(outputId = "ri_trips_fig") # Ntrips
                ), 
@@ -42,7 +106,7 @@ ui <- fluidPage(
                         p("This may take a moment to load. Thank you for your patience"),
                         plotly::plotlyOutput(outputId = "ct_rhl_fig"),# Harvest
                         plotly::plotlyOutput(outputId = "ct_CV_fig"),# Angler Satis
-                        plotly::plotlyOutput(outputId = "ct_discards_fig"), # Disczrds)
+                        plotly::plotlyOutput(outputId = "ct_discards_fig"), # Discards)
                         plotly::plotlyOutput(outputId = "ct_totmort_fig"), # total mort
                         plotly::plotlyOutput(outputId = "ct_trips_fig") # Ntrips
                ),
@@ -51,7 +115,7 @@ ui <- fluidPage(
                         p("This may take a moment to load. Thank you for your patience"),
                         plotly::plotlyOutput(outputId = "ny_rhl_fig"),# Harvest
                         plotly::plotlyOutput(outputId = "ny_CV_fig"),# Angler Satis
-                        plotly::plotlyOutput(outputId = "ny_discards_fig"), # Disczrds)
+                        plotly::plotlyOutput(outputId = "ny_discards_fig"), # Discards)
                         plotly::plotlyOutput(outputId = "ny_totmort_fig"), # total mort
                         plotly::plotlyOutput(outputId = "ny_trips_fig") # Ntrips
                ),
@@ -60,7 +124,7 @@ ui <- fluidPage(
                         p("This may take a moment to load. Thank you for your patience"),
                         plotly::plotlyOutput(outputId = "nj_rhl_fig"),# Harvest
                         plotly::plotlyOutput(outputId = "nj_CV_fig"),# Angler Satis
-                        plotly::plotlyOutput(outputId = "nj_discards_fig"), # Disczrds)
+                        plotly::plotlyOutput(outputId = "nj_discards_fig"), # Discards)
                         plotly::plotlyOutput(outputId = "nj_totmort_fig"), # total mort
                         plotly::plotlyOutput(outputId = "nj_trips_fig") # Ntrips
                ),
@@ -69,7 +133,7 @@ ui <- fluidPage(
                         p("This may take a moment to load. Thank you for your patience"),
                         plotly::plotlyOutput(outputId = "de_rhl_fig"),# Harvest
                         plotly::plotlyOutput(outputId = "de_CV_fig"),# Angler Satis
-                        plotly::plotlyOutput(outputId = "de_discards_fig"), # Disczrds)
+                        plotly::plotlyOutput(outputId = "de_discards_fig"), # Discards)
                         plotly::plotlyOutput(outputId = "de_totmort_fig"), # total mort
                         plotly::plotlyOutput(outputId = "de_trips_fig") # Ntrips
                ),
@@ -78,7 +142,7 @@ ui <- fluidPage(
                         p("This may take a moment to load. Thank you for your patience"),
                         plotly::plotlyOutput(outputId = "md_rhl_fig"),# Harvest
                         plotly::plotlyOutput(outputId = "md_CV_fig"),# Angler Satis
-                        plotly::plotlyOutput(outputId = "md_discards_fig"), # Disczrds)
+                        plotly::plotlyOutput(outputId = "md_discards_fig"), # Discards)
                         plotly::plotlyOutput(outputId = "md_totmort_fig"), # total mort
                         plotly::plotlyOutput(outputId = "md_trips_fig") # Ntrips
                ),
@@ -87,7 +151,7 @@ ui <- fluidPage(
                         p("This may take a moment to load. Thank you for your patience"),
                         plotly::plotlyOutput(outputId = "va_rhl_fig"),# Harvest
                         plotly::plotlyOutput(outputId = "va_CV_fig"),# Angler Satis
-                        plotly::plotlyOutput(outputId = "va_discards_fig"), # Disczrds)
+                        plotly::plotlyOutput(outputId = "va_discards_fig"), # Discards)
                         plotly::plotlyOutput(outputId = "va_totmort_fig"), # total mort
                         plotly::plotlyOutput(outputId = "va_trips_fig") # Ntrips
                ),
@@ -96,7 +160,7 @@ ui <- fluidPage(
                         p("This may take a moment to load. Thank you for your patience"),
                         plotly::plotlyOutput(outputId = "nc_rhl_fig"),# Harvest
                         plotly::plotlyOutput(outputId = "nc_CV_fig"),# Angler Satis
-                        plotly::plotlyOutput(outputId = "nc_discards_fig"),  # Disczrds)
+                        plotly::plotlyOutput(outputId = "nc_discards_fig"),  # Discards)
                         plotly::plotlyOutput(outputId = "nc_totmort_fig"), # total mort
                         plotly::plotlyOutput(outputId = "nc_trips_fig") # Ntrips
                ), 
@@ -147,6 +211,15 @@ server <- function(input, output, session) {
   
   library(magrittr) 
   
+  ##############################################################################
+  ##############################################################################
+  # Section B: Server - constants and defaults
+  #   Reference harvest limits, the percent-change settings, shared date-slider
+  #   defaults, and Run_Name(), which sanitizes the user's run name (underscores
+  #   become hyphens, because the output filename convention parses on "_").
+  ##############################################################################
+  ##############################################################################
+
   ### Percent Change Approach
   sf_percent_change <- 10
   bsb_percent_change <- 10
@@ -189,6 +262,15 @@ server <- function(input, output, session) {
   }
   
   
+  ##############################################################################
+  ##############################################################################
+  # Section C: Server - dynamic season show/hide toggles
+  #   Each species x state can carry more than one season. The extra season
+  #   panels exist in the UI from the start and are hidden; these onclick
+  #   handlers reveal them. One handler per state x species x extra season.
+  ##############################################################################
+  ##############################################################################
+
   #### Toggle extra seasons on UI ####
   # Allows for extra seasons to show and hide based on click
   shinyjs::onclick("SFMAaddSeason",
@@ -255,6 +337,15 @@ server <- function(input, output, session) {
                    shinyjs::toggle(id = "SCUPncSeason2", anim = TRUE))
   
   #### Output$addSTATE ####
+  
+  ##############################################################################
+  ##############################################################################
+  # Section D: Server - per-state regulation input UI 
+  #   Nine near-identical blocks, MA through NC, each rendering that state's
+  #   season, bag and size inputs plus its per-species mode selectors.  
+  ##############################################################################
+  ##############################################################################
+
   ############## MASSACHUSETTS ###########################################################
   output$addMA <- renderUI({
     if(any("MA" == input$state)){
@@ -3530,6 +3621,14 @@ server <- function(input, output, session) {
   
   
   
+  ##############################################################################
+  ##############################################################################
+  # Section E: Server - summary tab data and tables
+  #   Loads the selected result file, computes percent changes against the
+  #   status-quo run, and renders the coastwide summary tables and figures.
+  ##############################################################################
+  ##############################################################################
+
   outputs <- function(){
     flist <- list.files(path = here::here("output/"), pattern = "\\.csv$", full.names = TRUE)
     
@@ -3655,6 +3754,15 @@ server <- function(input, output, session) {
   
   
   ### Functions for state displays
+  ##############################################################################
+  ##############################################################################
+  # Section F: Server - figure helper functions
+  #   One builder per figure type (harvest limit, coefficient of variation,
+  #   trips, discards, total mortality), each parameterized by state so the
+  #   nine per-state figure sets in Section G are thin wrappers around these.
+  ##############################################################################
+  ##############################################################################
+
   rhl_fig <- function(data, state_name){
     
     # Reference values (SQ model only)
@@ -3932,6 +4040,14 @@ server <- function(input, output, session) {
   }
   
   ### MA
+  ##############################################################################
+  ##############################################################################
+  # Section G: Server - per-state result figures
+  #   Four plotly outputs per state (harvest limit, trips, discards, total
+  #   mortality), each calling the corresponding Section F helper.
+  ##############################################################################
+  ##############################################################################
+
   output$ma_rhl_fig<- plotly::renderPlotly({
     rhl_ma <- rhl_fig(outputs(), "MA")
     rhl_ma
@@ -4165,6 +4281,17 @@ server <- function(input, output, session) {
     mort_nc
   })
   
+  ##############################################################################
+  ##############################################################################
+  # Section H: Server - scenario submission and job enqueue
+  #   Gathers every regulation input for the selected states into one long
+  #   data frame, writes it to saved_regs/regs_<Run_Name>.csv, and posts a
+  #   base64-encoded job message to the Azure Storage Queue named by
+  #   AZURE_STORAGE_QUEUE_URL. This is the decoupling point: the app's
+  #   responsibility ends at the queue, and a separate worker runs the model.
+  ##############################################################################
+  ##############################################################################
+
   ####  Storing Inputs for decoupled model ####
   
   regulations <- observeEvent(input$runmeplease,{
@@ -5065,6 +5192,15 @@ server <- function(input, output, session) {
     output$message <- renderText("Regulations saved - we will run these soon be sure to change run name before clicking again.")
   })
   
+  ##############################################################################
+  ##############################################################################
+  # Section I: Server - result file browsing and download
+  #   Lists whatever result files are present in output/, derives display names
+  #   from the filename convention output_<ST>_<Run_Name>_<timestamp>.csv, and
+  #   serves the selected file as a download.
+  ##############################################################################
+  ##############################################################################
+
   # Get list of files from the folder
   available_files <- reactive({
     folder_path <- here::here("output/")
