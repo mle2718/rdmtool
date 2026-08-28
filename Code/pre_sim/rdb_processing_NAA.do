@@ -53,9 +53,9 @@ set seed 12345
 	
 /* Summer flounder */
 import delimited using "$misc_data_cd/`sf_assess'", clear
+cap drop a0
 
-
-forvalues class =0/7{
+forvalues class =1/7{
 	rename a`class' age`class'
 
 }
@@ -83,8 +83,9 @@ save "$misc_data_cd/`SF_historical_filename'", replace
 
 /* sf projections are in individuals, so divide by 1000 */
 import delimited using "$misc_data_cd/`sf_project'", clear
+cap drop a0
 
-forvalues class =0/7{
+forvalues class =1/7{
 	rename a`class' age`class'
 	replace age`class'=age`class'/1000
 
@@ -115,8 +116,9 @@ save "$misc_data_cd/`SF_projected_filename'", replace
 /*******************************************************/
 import delimited using "$misc_data_cd/`scup_assess'", clear
 
+cap drop a0
 
-forvalues class =0/7{
+forvalues class =1/7{
 	rename a`class' age`class'
 
 
@@ -148,8 +150,9 @@ save "$misc_data_cd/`Scup_historical_filename'", replace
 
 /* scup projections are in individuals, so divide by 1000 */
 import delimited using "$misc_data_cd/`scup_project'", clear
+cap drop a0
 
-forvalues class =0/7{
+forvalues class =1/7{
 	replace a`class'=a`class'/1000
 	rename a`class' age`class'
 
